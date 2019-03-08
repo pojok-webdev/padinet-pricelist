@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
   },
-  { path: 'pricelists', loadChildren: './pricelists/pricelists.module#PricelistsPageModule' }
+  { path: 'pricelists', loadChildren: './pricelists/pricelists.module#PricelistsPageModule' },
+  { path: 'pricelist-add', loadChildren: './pricelist-add/pricelist-add.module#PricelistAddPageModule' }
 ];
 
 @NgModule({
