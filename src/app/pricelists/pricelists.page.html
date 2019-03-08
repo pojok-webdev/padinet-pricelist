@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pricelists</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list >
+    <ion-menu-toggle auto-hide="false" *ngFor="let obj of objs">
+      <ion-item>
+        <ion-label>
+            {{obj.servicename}}
+        </ion-label>
+        <ion-label>{{obj.capacity}}</ion-label>
+        <h3>{{obj.price}}</h3>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-list>
+</ion-content>
