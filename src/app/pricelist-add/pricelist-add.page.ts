@@ -7,11 +7,14 @@ import { PricelistService } from '../pricelist.service';
   styleUrls: ['./pricelist-add.page.scss'],
 })
 export class PricelistAddPage implements OnInit {
-  obj
+  obj = {
+    price:0,servicename:'',capacity:''
+  }
   constructor(private priceList: PricelistService) { }
   save(obj){
     this.priceList.save(obj,result => {
       console.log("Result",result)
+      window.location.href = "/pricelists"
     })
   }
 

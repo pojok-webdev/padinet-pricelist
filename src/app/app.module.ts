@@ -9,13 +9,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms'
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [ConfirmationComponent,AppComponent],
+  entryComponents: [ConfirmationComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule
   ],
