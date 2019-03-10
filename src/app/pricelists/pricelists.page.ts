@@ -10,7 +10,10 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
 })
 export class PricelistsPage implements OnInit {
 objs
-  constructor(private priceList:PricelistService,private modalcontroller: ModalController) {
+  constructor(
+    private priceList:PricelistService,
+    private modalcontroller: ModalController
+  ) {
     this.priceList.gets(result=>{
       console.log("Result",result)
       this.objs = result
@@ -30,6 +33,13 @@ objs
       break
     }
   }
+  handleModalDismiss(d){
+    console.log("D",d)
+    this.priceList.gets(result=>{
+      console.log("Result",result)
+      this.objs = result
+    })
+  }
   async showModal(obj){
     const modal = await this.modalcontroller.create({
       component:ConfirmationComponent,
@@ -42,6 +52,7 @@ objs
         capacity:obj.capacity
       }
     })
+    modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
     //const {data} = await modal.onDidDismiss()
     //console.log("Data",data)
     return await modal.present()

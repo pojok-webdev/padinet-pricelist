@@ -9,17 +9,24 @@ import { PricelistService } from '../pricelist.service';
 })
 export class ConfirmationComponent implements OnInit {
 obj 
-  constructor(private modalController: ModalController,private params: NavParams,private pricelist:PricelistService) {
+  constructor(
+    private modalController: ModalController,
+    private params: NavParams,
+    private pricelist:PricelistService
+  ) {
     this.obj = this.params.data
     console.log("OBJ",this.params.data)
   }
 
   ngOnInit() {}
-  closeDialog(){
+  saveService(){
     console.log("Params",this.params.data.id,this.params.data.capacity)
     this.pricelist.update(this.params.data,result=>{
       console.log("Result",result)
     })
+    this.modalController.dismiss()
+  }
+  closeDialog(){
     this.modalController.dismiss()
   }
 }
