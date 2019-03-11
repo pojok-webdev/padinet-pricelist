@@ -11,9 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { PricelistUpdateComponent } from './pricelist-update/pricelist-update.component';
 @NgModule({
-  declarations: [ConfirmationComponent,AppComponent],
-  entryComponents: [ConfirmationComponent],
+  declarations: [ConfirmationComponent,PricelistUpdateComponent,AppComponent],
+  entryComponents: [ConfirmationComponent,PricelistUpdateComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

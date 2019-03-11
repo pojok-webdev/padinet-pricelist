@@ -13,6 +13,14 @@
 
 <ion-content padding>
   <ion-list >
+    <ion-list-header color="medium">
+      <ion-label>Nama</ion-label>
+      <ion-label>Kapasitas</ion-label>
+      <ion-label>Harga</ion-label>
+      <ion-label>Nego 1</ion-label>
+      <ion-label>Nego 2</ion-label>
+      <ion-label>Aksi</ion-label>
+    </ion-list-header>
     <ion-menu-toggle auto-hide="false" *ngFor="let obj of objs">
       <ion-item>
         <ion-label>
@@ -24,6 +32,7 @@
         <ion-label>{{obj.upperprice}}</ion-label>
         <ion-buttons>
           <ion-button (click)="doEdit(obj)">Edit</ion-button>
+          <ion-button (click)="doNego(obj)">Nego</ion-button>
           <ion-button (click)="doRemove(obj)">Hapus</ion-button>
         </ion-buttons>
       </ion-item>

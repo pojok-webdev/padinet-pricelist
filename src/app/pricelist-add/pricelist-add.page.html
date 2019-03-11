@@ -13,13 +13,16 @@
     <ion-input [(ngModel)]="obj.capacity" placeholder="Kapasitas"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input [(ngModel)]="obj.basicprice" placeholder="Harga Dasar"></ion-input>
+    <ion-input [(ngModel)]="obj.basicprice" placeholder="Kompetisi"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Bawah"></ion-input>
+    <ion-input [(ngModel)]="obj.normalprice" placeholder="Harga Pricelist"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input [(ngModel)]="obj.upperprice" placeholder="Harga Atas"></ion-input>
+    <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Nego Pertama"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="obj.upperprice" placeholder="Harga Nego Kedua"></ion-input>
   </ion-item>
   <ion-button (click)="save(obj)">Simpan</ion-button>
 

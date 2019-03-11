@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-menu-toggle auto-hide="false" *ngFor="let user of users">
+      <ion-item>
+        <ion-label (click)="doLogin(user.username)">
+          {{user.username}}
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-list>
+</ion-content>

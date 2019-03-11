@@ -16,7 +16,9 @@ const routes: Routes = [
     loadChildren: './list/list.module#ListPageModule'
   },
   { path: 'pricelists', loadChildren: './pricelists/pricelists.module#PricelistsPageModule' },
-  { path: 'pricelist-add', loadChildren: './pricelist-add/pricelist-add.module#PricelistAddPageModule' }
+  { path: 'pricelist-add', loadChildren: './pricelist-add/pricelist-add.module#PricelistAddPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'pricelist-nego/:id', loadChildren: './pricelist-nego/pricelist-nego.module#PricelistNegoPageModule' },
 ];
 
 @NgModule({

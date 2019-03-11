@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pricelist-nego</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Area Cabang</ion-label>
+    <ion-select [(ngModel)]="obj.branch" placeholder="Pilih Area" interface="popover">
+      <ion-select-option value="1">Surabaya</ion-select-option>
+      <ion-select-option value="2">Jakarta</ion-select-option>
+      <ion-select-option value="3">Malang</ion-select-option>
+      <ion-select-option value="4">Bali</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Kategori</ion-label>
+    <ion-select [(ngModel)]="obj.category" placeholder="Pilih Kategori" interface="popover" (ionChange)="changeCategory($event)">
+      <ion-select-option value="1">Broadband</ion-select-option>
+      <ion-select-option value="2">Dedicated</ion-select-option>
+      <ion-select-option value="3">Enterprise</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+      <ion-label>Layanan</ion-label>
+      <ion-select [(ngModel)]="obj.service" placeholder="Pilih Layanan" interface="popover" (ionChange)="changeCapacity($event)">
+        <ion-select-option value="{{service.id}}" *ngFor="let service of services">{{service.name}}</ion-select-option>
+      </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Media</ion-label>
+    <ion-select [(ngModel)]="obj.media" placeholder="Pilih Media" interface="popover">
+      <ion-select-option value="1">Wireless</ion-select-option>
+      <ion-select-option value="2">FO</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Kapasitas</ion-label>
+    <ion-select [(ngModel)]="obj.capacity" placeholder="Pilih Kapasitas" interface="popover">
+      <ion-select-option value="1">Wireless</ion-select-option>
+      <ion-select-option value="2">FO</ion-select-option>
+    </ion-select>
+  </ion-item>  
+  <ion-item>
+    <ion-input [(ngModel)]="obj.proposedprice" placeholder="Harga Yang diajukan"></ion-input>
+  </ion-item>
+  <ion-button (click)="save(obj)">Simpan</ion-button>
+
+</ion-content>

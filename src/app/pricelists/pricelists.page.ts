@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PricelistService } from '../pricelist.service';
 import { ModalController } from '@ionic/angular';
-import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { PricelistUpdateComponent } from '../pricelist-update/pricelist-update.component';
 
 @Component({
   selector: 'app-pricelists',
@@ -42,7 +42,7 @@ objs
   }
   async showModal(obj){
     const modal = await this.modalcontroller.create({
-      component:ConfirmationComponent,
+      component:PricelistUpdateComponent,
       componentProps:{
         id:obj.id,
         servicename:obj.servicename,
@@ -63,5 +63,8 @@ objs
   }
   doRemove(obj){
     console.log("Remove Obj",obj)
+  }
+  doNego(obj){
+    window.location.href = '/pricelist-nego/'+obj.id
   }
 }
