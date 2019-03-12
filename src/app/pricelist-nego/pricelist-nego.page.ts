@@ -27,7 +27,10 @@ export class PricelistNegoPage implements OnInit {
       case '2':
       console.log("duo")
       this.services = [
-        {id:"1",name:'Domestic IIX'},{id:"2",name:'Domestic Local Loop'},{id:"3",name:'International Padi MIX'},{id:"4",name:'International Enterprise'}
+        {id:"1",name:'Domestic IIX'},
+        {id:"2",name:'Domestic Local Loop'},
+        {id:"3",name:'International Padi MIX'},
+        {id:"4",name:'International Enterprise'}
       ]
       break
       case '3':
@@ -38,5 +41,20 @@ export class PricelistNegoPage implements OnInit {
       break
     }
   }
-  changeCapacity($event){}
+  changeCapacity($event){
+    switch(this.obj.service){
+      case '1':
+      console.log('satu')
+      break
+      case '2':
+      console.log('dua')
+      break;
+      case '3':
+      console.log('iga')
+      break
+      case '4':
+      console.log('empat')
+      break
+    }
+  }
 }

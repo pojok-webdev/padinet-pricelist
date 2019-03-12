@@ -45,9 +45,13 @@ objs
       component:PricelistUpdateComponent,
       componentProps:{
         id:obj.id,
+        category_id:obj.category_id,
+        servicename_id:obj.servicename_id,
+        media_id:obj.media_id,
         servicename:obj.servicename,
         basicprice:obj.basicprice,
         bottomprice:obj.bottomprice,
+        normalprice:obj.normalprice,
         upperprice:obj.upperprice,
         capacity:obj.capacity
       }

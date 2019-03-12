@@ -1,9 +1,29 @@
-<ion-input placeholder="Nama Layanan" [(ngModel)]="obj.servicename"></ion-input>
-<ion-input placeholder="Kapasitas" [(ngModel)]="obj.capacity"></ion-input>
-<ion-input placeholder="Kompetisi" [(ngModel)]="obj.basicprice"></ion-input>
-<ion-input placeholder="Harga Pricelist" [(ngModel)]="obj.normalprice"></ion-input>
-<ion-input placeholder="Harga Nego Pertama" [(ngModel)]="obj.bottomprice"></ion-input>
-<ion-input placeholder="Harga Nego Kedua" [(ngModel)]="obj.upperprice"></ion-input>
+<ion-list>
+  <ion-item>
+    <ion-label>Nama Layanan:</ion-label>
+    <ion-input placeholder="Nama Layanan" [(ngModel)]="obj.servicename" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Kapasitas:</ion-label>
+    <ion-input placeholder="Kapasitas" [(ngModel)]="obj.capacity"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Harga Kompetisi:</ion-label>
+    <ion-input placeholder="Kompetisi" [(ngModel)]="obj.basicprice"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Harga Pricelist:</ion-label>
+    <ion-input placeholder="Harga Pricelist" [(ngModel)]="obj.normalprice"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Harga Nego Pertama:</ion-label>
+    <ion-input placeholder="Harga Nego Pertama" [(ngModel)]="obj.bottomprice"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Harga Nego Kedua:</ion-label>
+    <ion-input placeholder="Harga Nego Kedua" [(ngModel)]="obj.upperprice"></ion-input>
+  </ion-item>
+</ion-list>
 <ion-buttons>
   <ion-button (click)="saveService()">Ya</ion-button>
   <ion-button (click)="closeDialog()">Tidak</ion-button>

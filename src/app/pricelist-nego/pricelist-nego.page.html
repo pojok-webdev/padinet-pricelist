@@ -30,7 +30,7 @@
   </ion-item>
   <ion-item>
     <ion-label>Media</ion-label>
-    <ion-select [(ngModel)]="obj.media" placeholder="Pilih Media" interface="popover">
+    <ion-select [(ngModel)]="obj.media" placeholder="Pilih Media" interface="popover" (ionChange)="changeCapacity($event)">
       <ion-select-option value="1">Wireless</ion-select-option>
       <ion-select-option value="2">FO</ion-select-option>
     </ion-select>
