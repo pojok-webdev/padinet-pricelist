@@ -16,6 +16,63 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `branches`
+--
+
+DROP TABLE IF EXISTS `branches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `branches` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `customs`
+--
+
+DROP TABLE IF EXISTS `customs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_id` smallint(6) DEFAULT NULL,
+  `clientname` varchar(200) DEFAULT NULL,
+  `clientpic` varchar(200) DEFAULT NULL,
+  `clienttlp` varchar(200) DEFAULT NULL,
+  `clientpichp` varchar(200) DEFAULT NULL,
+  `clientemail` varchar(200) DEFAULT NULL,
+  `clientaddress` varchar(200) DEFAULT NULL,
+  `activationtarget` date DEFAULT NULL,
+  `img` longblob,
+  `category_id` smallint(6) DEFAULT NULL,
+  `servicename_id` smallint(6) DEFAULT NULL,
+  `media_id` smallint(6) DEFAULT NULL,
+  `customprice` decimal(12,2) DEFAULT NULL,
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `groups`
 --
 
@@ -43,6 +100,21 @@ CREATE TABLE `groups_users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `medias`
+--
+
+DROP TABLE IF EXISTS `medias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `medias` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `pricelists`
 --
 
@@ -51,7 +123,9 @@ DROP TABLE IF EXISTS `pricelists`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pricelists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `servicename` varchar(50) DEFAULT NULL,
+  `category_id` smallint(6) DEFAULT NULL,
+  `servicename_id` smallint(6) DEFAULT NULL,
+  `media_id` smallint(6) DEFAULT NULL,
   `capacity` varchar(50) DEFAULT NULL,
   `basicprice` decimal(12,2) DEFAULT NULL,
   `normalprice` decimal(12,2) DEFAULT NULL,
@@ -59,7 +133,23 @@ CREATE TABLE `pricelists` (
   `upperprice` decimal(12,2) DEFAULT NULL,
   `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `servicenames`
+--
+
+DROP TABLE IF EXISTS `servicenames`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `servicenames` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `category_id` smallint(6) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,4 +177,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-11 16:59:18
+-- Dump completed on 2019-03-13 16:47:05
