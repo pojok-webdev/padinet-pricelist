@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'pricelist-add', loadChildren: './pricelist-add/pricelist-add.module#PricelistAddPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'pricelist-nego/:id', loadChildren: './pricelist-nego/pricelist-nego.module#PricelistNegoPageModule' },
+  { path: 'quotation-lists', loadChildren: './quotation-lists/quotation-lists.module#QuotationListsPageModule' },
 ];
 
 @NgModule({

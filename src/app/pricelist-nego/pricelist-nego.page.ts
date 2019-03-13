@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../category.service';
+import { PricelistService } from '../pricelist.service';
+import { CustomsService } from '../customs.service';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -7,54 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricelistNegoPage implements OnInit {
   obj = {
-    branch:'',category:'',service:'',media:'',capacity:'',proposedprice:0
+    branch:'',category:'',service:'',media:'',capacity:'',customprice:0,clientpic:'',clienttlp:'',clientpichp:'',clientemail:'',clientaddress:'',activationtarget:'',img:''
   }
-  services = [
-    {id:"1",name:'IBB'},{id:"2",name:'Cluster'},{id:"3",name:'Oryza'},{id:"4",name:'SBI'}
-  ]
-  constructor() { }
+  services
+  capacities
+  prices
+  constructor(
+    private categoryservice: CategoryService,
+    private pricelist:PricelistService,
+    private custom: CustomsService
+  ) { }
 
   ngOnInit() {
   }
-  changeCategory($event){
-    switch($event.target.value){
-      case '1':
-      console.log("satu")
-      this.services = [
-        {id:"1",name:'IBB'},{id:"2",name:'Cluster'},{id:"3",name:'Oryza'},{id:"4",name:'SBI'}
-      ]
-          break
-      case '2':
-      console.log("duo")
-      this.services = [
-        {id:"1",name:'Domestic IIX'},
-        {id:"2",name:'Domestic Local Loop'},
-        {id:"3",name:'International Padi MIX'},
-        {id:"4",name:'International Enterprise'}
-      ]
-      break
-      case '3':
-      console.log("tiga")
-      this.services = [
-        {id:"1",name:'IBB'},{id:"2",name:'Cluster'},{id:"3",name:'Oryza'},{id:"4",name:'SBI'}
-      ]
-      break
-    }
+  changeCategory(obj){
+    this.categoryservice.servicenamegetbycatgory(obj,result => {
+      this.services = result
+    })
   }
-  changeCapacity($event){
-    switch(this.obj.service){
-      case '1':
-      console.log('satu')
-      break
-      case '2':
-      console.log('dua')
-      break;
-      case '3':
-      console.log('iga')
-      break
-      case '4':
-      console.log('empat')
-      break
-    }
+  changeCapacity(obj){
+    this.categoryservice.getcapacities(obj,result => {
+      console.log("getcapacities",result)
+      this.capacities = result
+    })
+  }
+  getPrices(obj){
+    this.categoryservice.getprices(obj,result => {
+      this.prices = result
+    })
+  }
+  save(obj){
+    console.log("OBJ to save",obj)
+    this.custom.save(obj,result => {
+      console.log("Result",result)
+    })
   }
 }

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>quotation-lists</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<ion-list>
+  <ion-item-group *ngFor="let quotation of quotations">
+    <ion-item-divider>
+        <ion-label text-wrap>{{quotation.branch}}</ion-label>
+        <ion-item>{{quotation.clientname}}</ion-item>    
+    </ion-item-divider>
+        <ion-item>
+          <ion-label>Alamat: </ion-label>
+          <ion-label>{{quotation.clientaddress}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>PIC: </ion-label>
+          <ion-label>{{quotation.clientpic}}</ion-label>
+          <ion-label>{{quotation.clienttlp}}</ion-label>
+          <ion-label>{{quotation.clientpichp}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Layanan</ion-label>
+          <ion-label>{{quotation.category}}</ion-label>
+          <ion-label>{{quotation.servicename}}</ion-label>
+          <ion-label>{{quotation.media}}</ion-label>
+          <ion-label>{{quotation.capacity}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Target Aktivasi</ion-label>
+          <ion-label>{{quotation.clientactivationtarget}}</ion-label>
+        </ion-item>
+  </ion-item-group>
+</ion-list>
+</ion-content>

@@ -10,7 +10,7 @@ export class ServicenameService {
   obj : Observable<any>
   constructor(private http: HttpClient,private appvar: AppvarService) { }
   gets(callback){
-    this.obj = this.http.get('http://'+this.appvar.server+':'+this.appvar.port+'/servicenamegets')
+    this.obj = this.http.get(this.appvar.serverport+'servicenamegets')
     this.obj.subscribe(
       data => {
         callback(data)
@@ -21,7 +21,7 @@ export class ServicenameService {
     )
   }
   getbycategory(obj,callback){
-    this.obj = this.http.get('http://'+this.appvar.server+':'+this.appvar.port+'/servicenamegetbycatgory/'+obj.category_id)
+    this.obj = this.http.get(this.appvar.serverport+'servicenamegetbycatgory/'+obj.category_id)
     this.obj.subscribe(
       data => {
         callback(data)
@@ -32,7 +32,7 @@ export class ServicenameService {
     )
   }
   save(obj,callback){
-    this.obj = this.http.post('http://'+this.appvar.server+':'+this.appvar.port+'/servicenamesave',obj)
+    this.obj = this.http.post(this.appvar.serverport+'servicenamesave',obj)
     this.obj.subscribe(
       data => {
         callback(data)
@@ -43,7 +43,7 @@ export class ServicenameService {
     )
   }
   update(obj,callback){
-    this.obj = this.http.post('http://'+this.appvar.server+':'+this.appvar.port+'/servicenameupdate',obj)
+    this.obj = this.http.post(this.appvar.serverport+'servicenameupdate',obj)
     this.obj.subscribe(
       data => {
         callback(data)
