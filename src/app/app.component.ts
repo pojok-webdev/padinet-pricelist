@@ -11,12 +11,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Price Lists',
+      title: 'Daftar Harga',
       url: '/pricelists',
       icon: 'list'
     },
     {
-      title: 'Quotation Lists',
+      title: 'Penawaran di bawah harga Nego',
       url: '/quotation-lists',
       icon: 'list'
     }

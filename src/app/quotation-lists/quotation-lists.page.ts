@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomsService } from '../customs.service';
+import { LoginComponent } from '../login/login.component';
+import { ModalController } from '@ionic/angular';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-quotation-lists',
@@ -8,7 +11,11 @@ import { CustomsService } from '../customs.service';
 })
 export class QuotationListsPage implements OnInit {
   quotations
-  constructor(private custom: CustomsService) {
+  obj
+  constructor(
+    private custom: CustomsService,
+    private modalController: ModalController,
+  ) {
     this.custom.gets(result => {
       this.quotations = result
     })
@@ -16,5 +23,23 @@ export class QuotationListsPage implements OnInit {
 
   ngOnInit() {
   }
-
+  handleModalDismiss(d){
+    console.log("D",d)
+  }
+  async showModal(){
+    let obj = {
+      email:'pujiji@padi.net.id'
+    }
+    const modal = await this.modalController.create({
+      component:LoginComponent,
+      componentProps:{
+        email:obj.email,
+        password:obj.email
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
+    //const {data} = await modal.onDidDismiss()
+    //console.log("Data",data)
+    return await modal.present()
+  }
 }

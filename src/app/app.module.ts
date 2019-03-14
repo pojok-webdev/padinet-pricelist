@@ -12,9 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PricelistUpdateComponent } from './pricelist-update/pricelist-update.component';
+import { LoginComponent } from './login/login.component';
+import { SetpasswordComponent } from './setpassword/setpassword.component';
 @NgModule({
-  declarations: [ConfirmationComponent,PricelistUpdateComponent,AppComponent],
-  entryComponents: [ConfirmationComponent,PricelistUpdateComponent],
+  declarations: [ConfirmationComponent,PricelistUpdateComponent,LoginComponent,SetpasswordComponent,AppComponent],
+  entryComponents: [ConfirmationComponent,PricelistUpdateComponent,SetpasswordComponent,LoginComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
