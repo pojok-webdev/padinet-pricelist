@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PricelistService } from '../pricelist.service';
 import { ModalController } from '@ionic/angular';
 import { PricelistUpdateComponent } from '../pricelist-update/pricelist-update.component';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-pricelists',
@@ -12,8 +13,12 @@ export class PricelistsPage implements OnInit {
 objs
   constructor(
     private priceList:PricelistService,
-    private modalcontroller: ModalController
+    private modalcontroller: ModalController,
+    private user: UserService
   ) {
+    let email = localStorage.getItem("email")
+    let password = localStorage.getItem("password")
+    console.log("Email",email,"Passw",password)
     this.priceList.gets(result=>{
       console.log("Result",result)
       this.objs = result

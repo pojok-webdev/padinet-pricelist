@@ -16,6 +16,10 @@ export class UserService {
     this.obj = this.http.post(this.appvar.serverport+'usercheckpassword',obj)
     this.obj.subscribe(
       data => {
+        console.log("Email to store",data)
+        localStorage.setItem("email",data.obj[0].email)
+        localStorage.setItem("hash",data.obj[0].hash)
+        localStorage.setItem("password",obj.password)
         callback(data)
       },
       err => {

@@ -16,6 +16,8 @@ export class QuotationListsPage implements OnInit {
     private custom: CustomsService,
     private modalController: ModalController,
   ) {
+    let email = localStorage.getItem("email")
+    console.log("Email",email)
     this.custom.gets(result => {
       this.quotations = result
     })
@@ -28,7 +30,7 @@ export class QuotationListsPage implements OnInit {
   }
   async showModal(){
     let obj = {
-      email:'pujiji@padi.net.id'
+      email:'puji@padi.net.id'
     }
     const modal = await this.modalController.create({
       component:LoginComponent,
