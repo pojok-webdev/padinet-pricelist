@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category.service';
-import { PricelistService } from '../pricelist.service';
 import { CustomsService } from '../customs.service';
 
 @Component({
@@ -10,14 +9,25 @@ import { CustomsService } from '../customs.service';
 })
 export class PricelistNegoPage implements OnInit {
   obj = {
-    branch:'',category:'',service:'',media:'',capacity:'',customprice:0,clientpic:'',clienttlp:'',clientpichp:'',clientemail:'',clientaddress:'',activationtarget:'',img:''
+    branch:'',
+    category:'',
+    service:'',
+    media:'',
+    capacity:'',
+    customprice:0,
+    clientpic:'',
+    clienttlp:'',
+    clientpichp:'',
+    clientemail:'',
+    clientaddress:'',
+    activationtarget:'',
+    img:''
   }
   services
   capacities
   prices
   constructor(
     private categoryservice: CategoryService,
-    private pricelist:PricelistService,
     private custom: CustomsService
   ) { }
 
@@ -43,6 +53,7 @@ export class PricelistNegoPage implements OnInit {
     console.log("OBJ to save",obj)
     this.custom.save(obj,result => {
       console.log("Result",result)
+      window.location.href = '/quotation-lists'
     })
   }
 }

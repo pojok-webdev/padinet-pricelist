@@ -1,6 +1,8 @@
 {
   "name": "padinet-pricelist",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "8fefe91f"
 }

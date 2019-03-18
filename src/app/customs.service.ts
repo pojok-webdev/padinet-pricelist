@@ -31,4 +31,15 @@ private obj:Observable<any>
       }
     )
   }
+  getByMonth(obj,callback){
+    this.obj = this.http.get<any>(this.appvar.serverport+'getbymonth/'+obj.monthyear)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
 }

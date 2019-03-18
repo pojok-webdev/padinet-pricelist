@@ -19,6 +19,11 @@ export class AppComponent {
       title: 'Penawaran di bawah harga Nego',
       url: '/quotation-lists',
       icon: 'list'
+    },
+    {
+      title: 'Buat Penawaran',
+      url: '/pricelist-nego',
+      icon: 'list'
     }
   ];
 

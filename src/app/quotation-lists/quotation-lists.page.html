@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
       <ion-label>Daftar Penawaran Di bawah harga nego 2</ion-label>
+      <ion-datetime display-format="MM YYYY" slot="secondary" value="2019-3-1" placeholder="Filter Bulan" (ionChange)="monthChange($event)">
+
+      </ion-datetime>
       <ion-buttons slot="secondary">
         <ion-button (click)="showModal()">Login</ion-button>
       </ion-buttons>
@@ -10,15 +13,17 @@
 <ion-content padding>
 <ion-list>
   <ion-item-group *ngFor="let quotation of quotations">
-    <ion-item class="custom-list-header">
-      <ion-label>
-          Pelanggan
-        </ion-label>
+    <ion-item class="custom-list-header" color="primary">
         <ion-label>
           <h2>{{quotation.branch|uppercase}}</h2>
-          <h3>{{quotation.clientname|uppercase}}</h3>
+        </ion-label>
+        <ion-label>
+          <h3 color="warning">{{quotation.clientname|uppercase}}</h3>
           <h3>{{quotation.clientaddress}}</h3>
-        </ion-label>  
+        </ion-label>
+        <ion-button (click)="showDetail(quotation)">
+          <ion-icon name="more"></ion-icon>
+        </ion-button>
     </ion-item>
       <ion-item>
         <ion-label>

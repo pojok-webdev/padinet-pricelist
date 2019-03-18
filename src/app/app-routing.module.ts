@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'quotation-lists',
     pathMatch: 'full'
   },
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'pricelists', loadChildren: './pricelists/pricelists.module#PricelistsPageModule' },
   { path: 'pricelist-add', loadChildren: './pricelist-add/pricelist-add.module#PricelistAddPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'pricelist-nego/:id', loadChildren: './pricelist-nego/pricelist-nego.module#PricelistNegoPageModule' },
+  { path: 'pricelist-nego', loadChildren: './pricelist-nego/pricelist-nego.module#PricelistNegoPageModule' },
   { path: 'quotation-lists', loadChildren: './quotation-lists/quotation-lists.module#QuotationListsPageModule' },
 ];
 

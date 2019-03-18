@@ -6,6 +6,12 @@
 
 <ion-content padding>
   <ion-item>
+    <ion-label>Tanggal Penawaran</ion-label>
+    <ion-datetime [(ngModel)]="obj.quotation_date" display-format="YYYY-MM-DD" picker-format="DD MMMM YYYY" placeholder="Pilih Tanggal Penawaran">
+
+    </ion-datetime>
+  </ion-item>
+  <ion-item>
     <ion-label>Area Cabang</ion-label>
     <ion-select [(ngModel)]="obj.branch_id" placeholder="Pilih Area" interface="popover">
       <ion-select-option value="1">Surabaya</ion-select-option>
@@ -17,6 +23,10 @@
   <ion-item>
     <ion-label>Nama Pelanggan</ion-label>
     <ion-input placeholder="Nama Pelanggan" [(ngModel)]="obj.clientname"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>Alasan</ion-label>
+  <ion-input placeholder="Alasan Penawaran" [(ngModel)]="obj.reason"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label>Nama PIC</ion-label>

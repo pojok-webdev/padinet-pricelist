@@ -14,9 +14,23 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PricelistUpdateComponent } from './pricelist-update/pricelist-update.component';
 import { LoginComponent } from './login/login.component';
 import { SetpasswordComponent } from './setpassword/setpassword.component';
+import { QuotDetailComponent } from './quot-detail/quot-detail.component';
 @NgModule({
-  declarations: [ConfirmationComponent,PricelistUpdateComponent,LoginComponent,SetpasswordComponent,AppComponent],
-  entryComponents: [ConfirmationComponent,PricelistUpdateComponent,SetpasswordComponent,LoginComponent],
+  declarations: [
+    ConfirmationComponent,
+    PricelistUpdateComponent,
+    LoginComponent,
+    SetpasswordComponent,
+    AppComponent,
+    QuotDetailComponent
+  ],
+  entryComponents: [
+    ConfirmationComponent,
+    PricelistUpdateComponent,
+    SetpasswordComponent,
+    LoginComponent,
+    QuotDetailComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
