@@ -76,6 +76,7 @@ CREATE TABLE `customs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_id` smallint(6) DEFAULT NULL,
   `clientname` varchar(200) DEFAULT NULL,
+  `reason` text,
   `clientpic` varchar(200) DEFAULT NULL,
   `clienttlp` varchar(200) DEFAULT NULL,
   `clientpichp` varchar(200) DEFAULT NULL,
@@ -99,7 +100,7 @@ CREATE TABLE `customs` (
 
 LOCK TABLES `customs` WRITE;
 /*!40000 ALTER TABLE `customs` DISABLE KEYS */;
-INSERT INTO `customs` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,NULL,300000.00,'2019-03-13 02:13:46'),(2,1,'1','Badut','453535435','45435435','badut@ulangtahun.com','Jl Pelan-pelan 345','2019-03-23',_binary '-',1,1,1,NULL,300000.00,'2019-03-13 02:59:15'),(3,1,'Wau-wau','teong','12124343','5435345435','teong@gmail.com','Jl Kura-kura 222','2019-03-13',_binary '-',1,1,1,NULL,300000.00,'2019-03-13 03:32:23'),(4,1,'Elang Persada','Joko Wibowo','031-2224466','0888224466','joko@elang.co.id','Jl Rajawali 543 Surabaya','2019-03-14',_binary '-',1,1,1,NULL,550000.00,'2019-03-13 10:28:52'),(5,1,'Elang Perkasa Motor','Muh Huda','099987876','09987899','buhari@gmail.com','Jl Emas Berlian 234 Surabaya','2019-04-15',_binary '-',1,1,1,NULL,450000.00,'2019-03-15 02:55:03'),(6,1,'Lima Menara','Arnow Schwar sinaga','031 34321234','0888213232','arnie@gmail.com','Jl Pisang Kremes 234 Surabaya','2019-05-15','',2,3,1,'2019-03-15',350000.00,'2019-03-15 03:01:51');
+INSERT INTO `customs` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,NULL,300000.00,'2019-03-13 02:13:46'),(2,1,'1',NULL,'Badut','453535435','45435435','badut@ulangtahun.com','Jl Pelan-pelan 345','2019-03-23',_binary '-',1,1,1,NULL,300000.00,'2019-03-13 02:59:15'),(3,1,'Wau-wau',NULL,'teong','12124343','5435345435','teong@gmail.com','Jl Kura-kura 222','2019-03-13',_binary '-',1,1,1,NULL,300000.00,'2019-03-13 03:32:23'),(4,1,'Elang Persada',NULL,'Joko Wibowo','031-2224466','0888224466','joko@elang.co.id','Jl Rajawali 543 Surabaya','2019-03-14',_binary '-',1,1,1,NULL,550000.00,'2019-03-13 10:28:52'),(5,1,'Elang Perkasa Motor',NULL,'Muh Huda','099987876','09987899','buhari@gmail.com','Jl Emas Berlian 234 Surabaya','2019-04-15',_binary '-',1,1,1,NULL,450000.00,'2019-03-15 02:55:03'),(6,1,'Lima Menara',NULL,'Arnow Schwar sinaga','031 34321234','0888213232','arnie@gmail.com','Jl Pisang Kremes 234 Surabaya','2019-05-15','',2,3,1,'2019-03-15',350000.00,'2019-03-15 03:01:51');
 /*!40000 ALTER TABLE `customs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-15 11:00:37
+-- Dump completed on 2019-03-18 16:47:19
