@@ -11,6 +11,9 @@
     <ion-label>Alasan</ion-label>
     <ion-label>{{obj.reason}}</ion-label>
   </ion-item>
+  <ion-item>
+    <ion-label>Gambar</ion-label>
+    <img src="{{obj._img}}" alt="Gambar Tidak Tersedia" width="200">
+  </ion-item>
 </ion-list>
-<img src="{{obj._img}}" alt="{{obj.img}}" width="200">
 <ion-button (click)="closeDialog()">Tutup</ion-button>
