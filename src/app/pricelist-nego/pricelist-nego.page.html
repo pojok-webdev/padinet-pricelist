@@ -54,7 +54,9 @@
 </ion-item>
 <ion-item>
   <ion-label>Image</ion-label>
-  <ion-input placeholder="Image" [(ngModel)]="obj.img"></ion-input>
+  <ion-input [(ngModel)]="obj.img" type="hidden"></ion-input>
+  <ion-input type="file" placeholder="Pilih FIle" (change)="openFile($event,obj)"></ion-input>
+  <img [src]="uploadImage" alt="" id="img">
 </ion-item>
 <ion-item>
     <ion-label>Kategori</ion-label>

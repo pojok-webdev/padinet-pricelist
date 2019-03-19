@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { CustomsService } from '../customs.service';
+import { ImageService } from '../image.service';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -26,9 +27,11 @@ export class PricelistNegoPage implements OnInit {
   services
   capacities
   prices
+  uploadImage
   constructor(
     private categoryservice: CategoryService,
-    private custom: CustomsService
+    private custom: CustomsService,
+    private imageService: ImageService
   ) { }
 
   ngOnInit() {
@@ -56,4 +59,23 @@ export class PricelistNegoPage implements OnInit {
       window.location.href = '/quotation-lists'
     })
   }
+  openFile(event,obj){
+    console.log("Data",event.target)
+    let that = this
+    var input = event.target;
+    var myElement = document.getElementById("img")
+    //myElement.attributes["src"] = 
+    var filereader = new FileReader();
+    filereader.onload = function(){
+      that.imageService.resizeImage(filereader.result,1600,res=>{
+        //myElement.attributes["src"] = res
+        that.uploadImage = res
+        obj.img = res
+        console.log("Res",res)
+      })
+  
+    }
+
+    filereader.readAsDataURL(input.files[0]);
+}
 }

@@ -52,6 +52,7 @@ export class QuotationListsPage implements OnInit {
     })
   }
   async showDetail(obj){
+    console.log("OBJ",obj)
     const modal = await this.modalController.create({
       component:QuotDetailComponent,
       componentProps:{
