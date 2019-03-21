@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { UserService } from './user.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -11,28 +13,62 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Daftar Harga',
+      title: 'Informasi Harga',
       url: '/pricelists',
       icon: 'list'
     },
     {
-      title: 'Penawaran di bawah harga Nego',
+      title: 'Pengajuan Harga',
+      url: '/pricelist-nego',
+      icon: 'list'
+    },
+    {
+      title: 'Histori Pengajuan Harga',
       url: '/quotation-lists',
       icon: 'list'
     },
     {
-      title: 'Buat Penawaran',
-      url: '/pricelist-nego',
+      title: 'Promo',
+      url: '/promos',
       icon: 'list'
     }
   ];
-
+  isNotLogin
+  isLogin
+  userMail
+  obj = {
+    createuser:''
+  }
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private userService: UserService,
+    private loginService: LoginService
   ) {
     this.initializeApp();
+    this.userService.isLogin(    
+      res=>{
+      if(res!==false){
+        this.isNotLogin = true
+        this.userMail = res.email
+        this.obj.createuser = res.email
+        console.log("Ros",res)
+      }else{
+        this.isNotLogin = false
+        this.userMail = ''
+        console.log("Res",res)
+        this.loginService.showLoginModal(res => {
+          console.log("Here the data",res)
+          this.userMail = localStorage.getItem("email")
+          this.isLogin = false
+          this.isNotLogin = true
+          this.obj.createuser = localStorage.getItem("email")
+        })
+      }
+    });
+    this.isLogin = !this.isNotLogin
+
   }
 
   initializeApp() {

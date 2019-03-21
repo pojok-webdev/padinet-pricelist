@@ -3,6 +3,7 @@ import { PricelistService } from '../pricelist.service';
 import { ModalController } from '@ionic/angular';
 import { PricelistUpdateComponent } from '../pricelist-update/pricelist-update.component';
 import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-pricelists',
@@ -11,18 +12,41 @@ import { UserService } from '../user.service';
 })
 export class PricelistsPage implements OnInit {
 objs
+isLogin
+isNotLogin
+userMail
   constructor(
     private priceList:PricelistService,
     private modalcontroller: ModalController,
-    private user: UserService
+    private userService: UserService,
+    private loginService: LoginService
   ) {
-    let email = localStorage.getItem("email")
-    let password = localStorage.getItem("password")
-    console.log("Email",email,"Passw",password)
     this.priceList.gets(result=>{
       console.log("Result",result)
       this.objs = result
     })
+
+
+    this.userService.isLogin(    
+      res=>{
+      if(res!==false){
+        this.isNotLogin = true
+        this.userMail = res.email
+        console.log("Ros",res)
+      }else{
+        this.isNotLogin = false
+        this.userMail = ''
+        console.log("Res",res)
+        this.loginService.showLoginModal(res => {
+          console.log("Here the data",res)
+          this.userMail = localStorage.getItem("email")
+          this.isLogin = false
+          this.isNotLogin = true
+        })
+      }
+    });
+    this.isLogin = !this.isNotLogin
+
   }
   showAddPage(){
     window.location.href = '/pricelist-add'
@@ -76,4 +100,19 @@ objs
   doNego(obj){
     window.location.href = '/pricelist-nego/'+obj.id
   }
+  doLogout(){
+    this.userService.doLogout({},res=>{
+      console.log("Res",res)
+      this.userMail = ""
+      this.isLogin = true
+      this.isNotLogin = false
+      this.loginService.showLoginModal(res => {
+        console.log("Here the data",res)
+        this.userMail = localStorage.getItem("email")
+        this.isLogin = false
+        this.isNotLogin = true
+      })
+    })
+  }
+
 }

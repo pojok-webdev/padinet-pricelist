@@ -8,6 +8,11 @@
           Penambahan Layanan
         </ion-button>
       </ion-buttons>
+      <ion-label slot="secondary">{{userMail}}</ion-label>
+      <ion-buttons slot="secondary">
+        <ion-button (click)="showModal()" [hidden]="isNotLogin">Login</ion-button>
+        <ion-button (click)="doLogout()" [hidden]="isLogin">Logout</ion-button>
+      </ion-buttons>
       </ion-toolbar>
   </ion-header>
 
@@ -17,10 +22,10 @@
       <ion-label>Nama</ion-label>
       <ion-label>Kapasitas</ion-label>
       <ion-label>Media</ion-label>
-      <ion-label>Harga</ion-label>
+      <ion-label>Pricelist</ion-label>
       <ion-label>Nego 1</ion-label>
       <ion-label>Nego 2</ion-label>
-      <ion-label>Pricelist</ion-label>
+      <ion-label>Harga</ion-label>
       <ion-label>Aksi</ion-label>
     </ion-list-header>
     <ion-menu-toggle auto-hide="false" *ngFor="let obj of objs">
@@ -30,10 +35,10 @@
         </ion-label>
         <ion-label>{{obj.capacity}}</ion-label>
         <ion-label>{{obj.media}}</ion-label>
-        <ion-label>{{obj.basicprice}}</ion-label>
-        <ion-label>{{obj.bottomprice}}</ion-label>
-        <ion-label>{{obj.upperprice}}</ion-label>
-        <ion-label>{{obj.normalprice}}</ion-label>
+        <ion-label>{{obj.normalprice| number:'':'en-EN'}}</ion-label>
+        <ion-label>{{obj.bottomprice| number:'':'en-EN'}}</ion-label>
+        <ion-label>{{obj.upperprice| number:'':'en-EN'}}</ion-label>
+        <ion-label>{{obj.basicprice| number:'':'en-EN'}}</ion-label>
         <ion-buttons>
           <ion-button (click)="doEdit(obj)">Edit</ion-button>
           <ion-button (click)="doNego(obj)">Nego</ion-button>

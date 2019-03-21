@@ -1,3 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-list>
   <ion-item>
     <ion-label>Email</ion-label>
@@ -5,7 +11,7 @@
   </ion-item>
   <ion-item>
     <ion-label>Password</ion-label>
-    <ion-input [(ngModel)]="obj.password" placeholder="Password"></ion-input>
+    <ion-input [(ngModel)]="obj.password" placeholder="Password" type="password"></ion-input>
   </ion-item>
 </ion-list>
 <ion-button (click)="doLogin(obj)">Login</ion-button>

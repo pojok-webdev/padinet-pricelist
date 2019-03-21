@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { CustomsService } from '../customs.service';
 import { ImageService } from '../image.service';
+import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
+import { ModalController } from '@ionic/angular';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -22,18 +26,47 @@ export class PricelistNegoPage implements OnInit {
     clientemail:'',
     clientaddress:'',
     activationtarget:'',
-    img:''
+    img:'',
+    createuser:''
   }
   services
   capacities
   prices
   uploadImage
+  isNotLogin
+  isLogin
+  userMail
+
   constructor(
     private categoryservice: CategoryService,
     private custom: CustomsService,
-    private imageService: ImageService
-  ) { }
-
+    private imageService: ImageService,
+    private userService: UserService,
+    private loginService: LoginService,
+  ) {
+    this.userService.isLogin(    
+      res=>{
+      if(res!==false){
+        this.isNotLogin = true
+        this.userMail = res.email
+        this.obj.createuser = res.email
+        console.log("Ros",res)
+      }else{
+        this.isNotLogin = false
+        this.userMail = ''
+        console.log("Res",res)
+        this.loginService.showLoginModal(res => {
+          console.log("Here the data",res)
+          this.userMail = localStorage.getItem("email")
+          this.isLogin = false
+          this.isNotLogin = true
+          this.obj.createuser = localStorage.getItem("email")
+        })
+      }
+    });
+    this.isLogin = !this.isNotLogin
+  }
+  
   ngOnInit() {
   }
   changeCategory(obj){
@@ -75,7 +108,20 @@ export class PricelistNegoPage implements OnInit {
       })
   
     }
-
     filereader.readAsDataURL(input.files[0]);
-}
+  }
+  doLogout(){
+    this.userService.doLogout({},res=>{
+      console.log("Res",res)
+      this.userMail = ""
+      this.isLogin = true
+      this.isNotLogin = false
+      this.loginService.showLoginModal(res => {
+        console.log("Here the data",res)
+        this.userMail = localStorage.getItem("email")
+        this.isLogin = false
+        this.isNotLogin = true
+      })
+    })
+  }
 }

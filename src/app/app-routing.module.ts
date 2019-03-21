@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'pricelist-nego', loadChildren: './pricelist-nego/pricelist-nego.module#PricelistNegoPageModule' },
   { path: 'quotation-lists', loadChildren: './quotation-lists/quotation-lists.module#QuotationListsPageModule' },
+  { path: 'promos', loadChildren: './promos/promos.module#PromosPageModule' },
+  { path: 'sales-pricelists', loadChildren: './sales-pricelists/sales-pricelists.module#SalesPricelistsPageModule' },
 ];
 
 @NgModule({
