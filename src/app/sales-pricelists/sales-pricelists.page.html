@@ -5,5 +5,38 @@
 </ion-header>
 
 <ion-content padding>
-
+<ion-list>
+  <ion-item>
+    <ion-label>Layanan</ion-label>
+    <ion-select interface="popover" (ionChange)="serviceChange($event)" [(ngModel)]="service">
+      <ion-select-option *ngFor="let service of services" value="{{service.id}}">
+        {{service.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item [hidden] = "noSubservice">
+    <ion-label>Sub Layanan</ion-label>
+    <ion-select interface="popover" (ionChange)="subServiceChange($event)" [(ngModel)]="subService">
+      <ion-select-option *ngFor="let subService of subServices" value="{{subService.id}}">
+        {{subService.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item [hidden] = "noSubserviceLevel2">
+    <ion-label>Sub Layanan Level 2</ion-label>
+    <ion-select interface="popover" [(ngModel)]="subServiceLevel2">
+      <ion-select-option *ngFor="let subService of subServicesLevel2" value="{{subService.id}}">
+        {{subService.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item [hidden] = "noMedia">
+    <ion-label>Media</ion-label>
+    <ion-select interface="popover" [(ngModel)]="media">
+      <ion-select-option *ngFor="let media of medias" value="{{media.id}}">
+        {{media.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
 </ion-content>

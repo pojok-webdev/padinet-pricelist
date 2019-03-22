@@ -40,7 +40,7 @@ import { QuotDetailComponent } from './quot-detail/quot-detail.component';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
+    SplashScreen,AppComponent,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

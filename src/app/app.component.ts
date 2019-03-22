@@ -77,4 +77,47 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+  setMenuByRole(roleAbbr){
+    let priceInfoLabel = 'Informasi Harga'
+    switch(roleAbbr){
+      case 'Adm':
+      priceInfoLabel = 'Informasi Harga (Admin)'
+      break
+      case 'AM':
+      priceInfoLabel = 'Informasi Harga (AM)'
+      break
+      case 'SM':
+      priceInfoLabel = 'Informasi Harga (SM)'
+      break
+      case 'GM':
+      priceInfoLabel = 'Informasi Harga (GM)'
+      break
+      case 'DM':
+      priceInfoLabel = 'Informasi Harga (DM)'
+      break
+    }
+    console.log("Price Info Label",priceInfoLabel)
+    this.appPages = [
+      {
+        title: priceInfoLabel,
+        url: '/sales-pricelists',
+        icon: 'list'
+      },
+      {
+        title: 'Pengajuan Harga',
+        url: '/pricelist-nego',
+        icon: 'list'
+      },
+      {
+        title: 'Histori Pengajuan Harga',
+        url: '/quotation-lists',
+        icon: 'list'
+      },
+      {
+        title: 'Promo',
+        url: '/promos',
+        icon: 'list'
+      }
+    ];
+  }
 }

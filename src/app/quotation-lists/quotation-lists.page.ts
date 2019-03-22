@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { QuotDetailComponent } from '../quot-detail/quot-detail.component';
 import { UserService } from '../user.service'
 import { LoginService } from '../login.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-quotation-lists',
@@ -21,7 +22,8 @@ export class QuotationListsPage implements OnInit {
     private custom: CustomsService,
     private modalController: ModalController,
     private userService: UserService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private appComponent: AppComponent
   ) {
     let email = localStorage.getItem("email")
     console.log("Email",email)
@@ -39,7 +41,7 @@ export class QuotationListsPage implements OnInit {
           this.userMail = ''
           console.log("Res",res)
           this.loginService.showLoginModal(res => {
-            console.log("Here the data",res)
+            console.log("Here your data",res)
             this.custom.gets(result => {
               this.quotations = result
             })
@@ -75,6 +77,16 @@ export class QuotationListsPage implements OnInit {
 
     return await modal.present()
   }
+  showLogin(){
+    this.loginService.showLoginModal(res => {
+      console.log("Here the data got",res)
+      console.log("RoleAbbr",res.data.result)
+      this.userMail = localStorage.getItem("email")
+      this.isLogin = false
+      this.isNotLogin = true
+      this.obj.createuser = localStorage.getItem("email")
+    })
+  }
   monthChange(event){
     console.log("Month already changed",event.target.value)
     let monthyear = event.target.value
@@ -100,10 +112,13 @@ export class QuotationListsPage implements OnInit {
       this.isLogin = true
       this.isNotLogin = false
       this.loginService.showLoginModal(res => {
-        console.log("Here the data",res)
+        console.log("Here the logout data",res)
+        let roleAbbr = res.data.result.obj.roleabbr
+        console.log("RoleAbbr",res.data.result.obj.roleabbr)
         this.userMail = localStorage.getItem("email")
         this.isLogin = false
         this.isNotLogin = true
+        this.appComponent.setMenuByRole(roleAbbr)
       })
     })
   }

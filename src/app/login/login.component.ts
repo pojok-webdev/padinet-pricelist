@@ -21,7 +21,9 @@ obj = {
   doLogin(obj){
     this.user.doLogin(obj,result=>{
       console.log("Result",result)
-      this.modalController.dismiss()
+      this.modalController.dismiss({
+        result:result
+      })
     })
   }
 
