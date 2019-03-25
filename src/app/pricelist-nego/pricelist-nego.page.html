@@ -79,6 +79,12 @@
       </ion-select>
   </ion-item>
   <ion-item>
+    <ion-label>Sub Layanan</ion-label>
+    <ion-select [(ngModel)]="obj.subservice_id" placeholder="Pilih Sub Layanan" interface="popover" (ionChange)="changeCapacity(obj)">
+      <ion-select-option value="{{service.id}}" *ngFor="let service of subservices">{{service.name}}</ion-select-option>
+    </ion-select>
+</ion-item>
+<ion-item>
     <ion-label>Media</ion-label>
     <ion-select [(ngModel)]="obj.media_id" placeholder="Pilih Media" interface="popover" (ionChange)="changeCapacity(obj)">
       <ion-select-option value="1">Wireless</ion-select-option>

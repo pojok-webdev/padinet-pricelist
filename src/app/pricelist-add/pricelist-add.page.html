@@ -10,26 +10,34 @@
     <ion-item>
       <ion-label>Kategori</ion-label>
       <ion-select [(ngModel)]="obj.category" placeholder="Kategori" interface="popover" (ionChange)="populateServices()">
-        <ion-select-option *ngFor="let category of categories" value="{{category.name}}">
+        <ion-select-option *ngFor="let category of categories" value="{{category.id}}">
           {{category.name}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Nama Layanan:</ion-label>
-      <ion-select [(ngModel)]="obj.servicename" placeholder="Nama Layanan" interface="popover">
-          <ion-select-option *ngFor="let service of servicenames" value="{{service.name}}">
+      <ion-select [(ngModel)]="obj.servicename" placeholder="Nama Layanan" interface="popover" (ionChange)="populateSubServices()">
+          <ion-select-option *ngFor="let service of services" value="{{service.id}}">
               {{service.name}}
           </ion-select-option>
         </ion-select>
       </ion-item>
-    <ion-item>
+      <ion-item [hidden]="hideSubService">
+        <ion-label>Nama Sub Layanan:</ion-label>
+        <ion-select [(ngModel)]="obj.subservice" placeholder="Nama Sub Layanan" interface="popover">
+          <ion-select-option *ngFor="let service of subservices" value="{{service.id}}">
+              {{service.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item [hidden]="hideMedia">
       <ion-label>Media:</ion-label>
-      <ion-select [(ngModel)]="obj.media" placeholder="Media" interface="popover">
-        <ion-select-option value="wireless">
+      <ion-select [(ngModel)]="obj.media" placeholder="Media" interface="popover" (ionChange)="populateCapacities()">
+        <ion-select-option value="1">
           Wireless
         </ion-select-option>
-        <ion-select-option value="FO">
+        <ion-select-option value="2">
           FO
         </ion-select-option>
       </ion-select>

@@ -11,8 +11,38 @@ obj: Observable<any>
   constructor(private http: HttpClient,private appvar: AppvarService) {
 
   }
+  getCategories(callback){
+    this.obj = this.http.get(this.appvar.serverport+'categorygets')
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },err => {
+        callback(err)
+      }
+    )
+  }
+  getServicesbyCategory(obj,callback){
+    this.obj = this.http.get(this.appvar.serverport+'getservicesbycategory/'+obj.category_id)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },err => {
+        callback(err)
+      }
+    )
+  }
   getServices(callback){
-    this.obj = this.http.get(this.appvar.serverport+'getservices')
+    this.obj = this.http.get(this.appvar.serverport+'getservicesbycategory/')
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },err => {
+        callback(err)
+      }
+    )
+  }
+  getCapacities(obj,callback){
+    this.obj = this.http.get(this.appvar.serverport+'getcapacities/'+obj.category_id+'/'+obj.service_id+'/'+obj.subservice_id+'/'+obj.media_id)
     this.obj.subscribe(
       data => {
         callback(data)

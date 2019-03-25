@@ -1,42 +1,70 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>sales-pricelists</ion-title>
+    <ion-title>pricelist-add</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-<ion-list>
-  <ion-item>
-    <ion-label>Layanan</ion-label>
-    <ion-select interface="popover" (ionChange)="serviceChange($event)" [(ngModel)]="service">
-      <ion-select-option *ngFor="let service of services" value="{{service.id}}">
-        {{service.name}}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item [hidden] = "noSubservice">
-    <ion-label>Sub Layanan</ion-label>
-    <ion-select interface="popover" (ionChange)="subServiceChange($event)" [(ngModel)]="subService">
-      <ion-select-option *ngFor="let subService of subServices" value="{{subService.id}}">
-        {{subService.name}}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item [hidden] = "noSubserviceLevel2">
-    <ion-label>Sub Layanan Level 2</ion-label>
-    <ion-select interface="popover" [(ngModel)]="subServiceLevel2">
-      <ion-select-option *ngFor="let subService of subServicesLevel2" value="{{subService.id}}">
-        {{subService.name}}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item [hidden] = "noMedia">
-    <ion-label>Media</ion-label>
-    <ion-select interface="popover" [(ngModel)]="media">
-      <ion-select-option *ngFor="let media of medias" value="{{media.id}}">
-        {{media.name}}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-</ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>Kategori</ion-label>
+      <ion-select [(ngModel)]="obj.category" placeholder="Kategori" interface="popover" (ionChange)="populateServices()">
+        <ion-select-option *ngFor="let category of categories" value="{{category.id}}">
+          {{category.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nama Layanan:</ion-label>
+      <ion-select [(ngModel)]="obj.servicename" placeholder="Nama Layanan" interface="popover" (ionChange)="populateSubServices()">
+          <ion-select-option *ngFor="let service of services" value="{{service.id}}">
+              {{service.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item [hidden]="hideSubService">
+        <ion-label>Nama Sub Layanan:</ion-label>
+        <ion-select [(ngModel)]="obj.subservice_id" placeholder="Nama Sub Layanan" interface="popover">
+          <ion-select-option *ngFor="let service of subservices" value="{{service.id}}">
+              {{service.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item [hidden]="hideMedia">
+      <ion-label>Media:</ion-label>
+      <ion-select [(ngModel)]="obj.media_id" placeholder="Media" interface="popover" (ionChange)="getCapacities()">
+        <ion-select-option value="1">
+          Wireless
+        </ion-select-option>
+        <ion-select-option value="2">
+          FO
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Kapasitas:</ion-label>
+      <ion-select [(ngModel)]="obj.capacity" placeholder="Kapasitas" interface="popover">
+        <ion-select-option *ngFor="let capacity of capacities" value="capacity.id">{{capacity.capacity}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Kompetisi:</ion-label>
+      <ion-input [(ngModel)]="obj.basicprice" placeholder="Kompetisi"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Harga Pricelist:</ion-label>
+      <ion-input [(ngModel)]="obj.normalprice" placeholder="Harga Pricelist"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Harga Nego Pertama:</ion-label>
+      <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Nego Pertama"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Harga Nego Kedua:</ion-label>
+      <ion-input [(ngModel)]="obj.upperprice" placeholder="Harga Nego Kedua"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="save(obj)">Simpan</ion-button>
+
 </ion-content>

@@ -26,10 +26,11 @@ export class PricelistService {
     )
   }
   getcapacities(obj,callback){
-    this.obj = this.http.get<any>('http://'+this.appvar.server+':'+this.appvar.port+'/getcapacities/'+obj.category_id+'/'+obj.servicename_id+'/'+obj.media_id)
+    this.obj = this.http
+    .get<any>('http://'+this.appvar.server+':'+this.appvar.port+'/getcapacities/'+obj.category_id+'/'+obj.service_id+'/'+obj.subservice_id+'/'+obj.media_id)
     this.obj.subscribe(
       data => {
-        console.log("Data",data)
+        console.log("capacity Data",data)
         callback(data)
       },
       err => {

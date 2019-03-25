@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PricelistService } from '../pricelist.service';
 import { CategoryService } from '../category.service';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-pricelist-add',
@@ -18,29 +19,45 @@ export class PricelistAddPage implements OnInit {
     media_id:0
   }
   categories
+  services
   servicenames
+  subservices
   capactities
+  hideSubService
+  hideMedia
   constructor(
     private priceList: PricelistService,
-    private category: CategoryService
+    private category: CategoryService,
+    private serviceService: ServiceService
   ) {
     this.category.gets(result => {
       this.categories = result
     })
+    this.hideMedia = true
+    this.hideSubService = true
+  }
+  getCategories(){
+    this.serviceService.getCategories(res => {
+      this.categories = res
+    })
   }
   populateServices(){
-    switch(this.obj.category){
-      case 'Dedicated':
-      this.servicenames = [
-        {name:'IIX'},{name:'Local Loop'},{name:'Padi Mix'},{name:'Enterprise'}
-      ]
-      break
-      case 'Broadband':
-      this.servicenames = [
-        {name:'IBB'},{name:'Cluster'},{name:'Oryza'},{name:'SBI'}
-      ]
-      break
+
+    if(parseInt(this.obj.category)===2){
+      this.hideSubService = false
+      this.hideMedia = false
     }
+    this.serviceService.getServicesbyCategory({category_id:this.obj.category},result => {
+      this.services = result
+    })
+  }
+  populateSubServices(){
+    this.serviceService.getSubServices({service_id:this.obj.servicename},result => {
+      this.subservices = result
+    })
+  }
+  populateCapacities(){
+    //this.serviceService.getCapacities()
   }
   getCapacities(){
     this.priceList.getcapacities(
@@ -61,5 +78,4 @@ export class PricelistAddPage implements OnInit {
 
   ngOnInit() {
   }
-
 }
