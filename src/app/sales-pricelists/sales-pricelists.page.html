@@ -9,7 +9,7 @@
   <ion-list>
     <ion-item>
       <ion-label>Kategori</ion-label>
-      <ion-select [(ngModel)]="obj.category" placeholder="Kategori" interface="popover" (ionChange)="populateServices()">
+      <ion-select [(ngModel)]="obj.category_id" placeholder="Kategori" interface="popover" (ionChange)="populateServices()">
         <ion-select-option *ngFor="let category of categories" value="{{category.id}}">
           {{category.name}}
         </ion-select-option>
@@ -17,7 +17,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Nama Layanan:</ion-label>
-      <ion-select [(ngModel)]="obj.servicename" placeholder="Nama Layanan" interface="popover" (ionChange)="populateSubServices()">
+      <ion-select [(ngModel)]="obj.service_id" placeholder="Nama Layanan" interface="popover" (ionChange)="populateSubServices()">
           <ion-select-option *ngFor="let service of services" value="{{service.id}}">
               {{service.name}}
           </ion-select-option>
@@ -44,8 +44,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Kapasitas:</ion-label>
-      <ion-select [(ngModel)]="obj.capacity" placeholder="Kapasitas" interface="popover">
-        <ion-select-option *ngFor="let capacity of capacities" value="capacity.id">{{capacity.capacity}}</ion-select-option>
+      <ion-select [(ngModel)]="obj.capacity" placeholder="Kapasitas" interface="popover" (ionChange)="getPrices()">
+        <ion-select-option *ngFor="let capacity of capacities" value="{{capacity.capacity}}">{{capacity.capacity}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>

@@ -13,10 +13,10 @@ export class PricelistService {
     private appvar: AppvarService
   ) { }
   gets(callback){
-    this.obj = this.http.get<any>('http://'+this.appvar.server+':'+this.appvar.port+'/pricelistgets')
+    this.obj = this.http.get<any>(this.appvar.serverport+'pricelistgets')
     this.obj.subscribe(
       data => {
-        console.log("Data",data)
+        console.log("Pricelists Data",data)
         callback(data)
       },
       err => {
@@ -27,10 +27,24 @@ export class PricelistService {
   }
   getcapacities(obj,callback){
     this.obj = this.http
-    .get<any>('http://'+this.appvar.server+':'+this.appvar.port+'/getcapacities/'+obj.category_id+'/'+obj.service_id+'/'+obj.subservice_id+'/'+obj.media_id)
+    .get<any>(this.appvar.serverport+'getcapacities/'+obj.category_id+'/'+obj.service_id+'/'+obj.subservice_id+'/'+obj.media_id)
     this.obj.subscribe(
       data => {
-        console.log("capacity Data",data)
+        console.log("Capacity Data",data)
+        callback(data)
+      },
+      err => {
+        console.log("Err",err)
+        callback(err)
+      }
+    )
+  }
+  getPrices(obj,callback){
+    this.obj = this.http
+    .post<any>(this.appvar.serverport+'getprices',obj)
+    this.obj.subscribe(
+      data => {
+        console.log("Prices Data",data)
         callback(data)
       },
       err => {
@@ -40,7 +54,7 @@ export class PricelistService {
     )
   }
   save(obj,callback){
-    this.obj = this.http.post<any>('http://'+this.appvar.server+':'+this.appvar.port+'/pricelistsave',obj)
+    this.obj = this.http.post<any>(this.appvar.serverport+'pricelistsave',obj)
     this.obj.subscribe(
       data => {
         callback(data)
@@ -51,7 +65,7 @@ export class PricelistService {
     )
   }
   update(obj,callback){
-    this.obj = this.http.post<any>('http://'+this.appvar.server+':'+this.appvar.port+'/pricelistupdate',obj)
+    this.obj = this.http.post<any>(this.appvar.serverport+'pricelistupdate',obj)
     this.obj.subscribe(
       data => {
         callback(data)
@@ -62,7 +76,7 @@ export class PricelistService {
     )
   }
   remove(obj,callback){
-    this.obj = this.http.post<any>('http://'+this.appvar.server+':'+this.appvar.port+'/pricelistremove',obj)
+    this.obj = this.http.post<any>(this.appvar.serverport+'pricelistremove',obj)
     this.obj.subscribe(
       data => {
         callback(data)

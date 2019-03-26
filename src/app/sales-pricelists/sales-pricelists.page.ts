@@ -32,8 +32,10 @@ obj = {
   capacity:'',
   media_id:0,
   service_id:0,subservice_id:0,
+  basicprice:0,normalprice:0,bottomprice:0,upperprice:0
 }
 capacities
+prices
   constructor(
     private serviceService: ServiceService,
     private priceList: PricelistService
@@ -50,17 +52,17 @@ capacities
     })
   }
   populateServices(){
-
-    if(parseInt(this.obj.category)===2){
+    console.log("category_id",this.obj.category_id)
+    if(this.obj.category_id == 2){
       this.hideSubService = false
       this.hideMedia = false
     }
-    this.serviceService.getServicesbyCategory({category_id:this.obj.category},result => {
+    this.serviceService.getServicesbyCategory({category_id:this.obj.category_id},result => {
       this.services = result
     })
   }
   populateSubServices(){
-    this.serviceService.getSubServices({service_id:this.obj.servicename},result => {
+    this.serviceService.getSubServices({service_id:this.obj.service_id},result => {
       this.subservices = result
     })
   }
@@ -68,15 +70,26 @@ capacities
     console.log("get capacity OBJ",this.obj)
     this.priceList.getcapacities(
       {
-        category_id:this.obj.category,
-        service_id:this.obj.servicename,
+        category_id:this.obj.category_id,
+        service_id:this.obj.service_id,
         subservice_id:this.obj.subservice_id,
         media_id:this.obj.media_id
       },result => {
       this.capacities = result
     })
   }
-
+  getPrices(){
+    console.log('getPrices invoked')
+    this.priceList.getPrices(this.obj, result => {
+      console.log("getPrices RESULT",result)
+      console.log('OBJ',this.obj)
+      let res = result[0]
+      this.obj.basicprice = res.basicprice
+      this.obj.normalprice = res.normalprice
+      this.obj.bottomprice = res.bottomprice
+      this.obj.upperprice = res.upperprice
+    })
+  }
   serviceChange(event){
     let _service_id =  event.target.value
     this.subServices = [{service_id:_service_id,name:'-',id:0}]
