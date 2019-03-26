@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>pricelist-add</ion-title>
-
+    <ion-label slot="secondary">{{userMail}}</ion-label>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="showModal()" [hidden]="isNotLogin">Login</ion-button>
+      <ion-button (click)="doLogout()" [hidden]="isLogin">Logout</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

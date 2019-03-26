@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
 import { ModalController } from '@ionic/angular';
 import { LoginComponent } from '../login/login.component';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -43,8 +44,9 @@ export class PricelistNegoPage implements OnInit {
     private imageService: ImageService,
     private userService: UserService,
     private loginService: LoginService,
+    private appComponent: AppComponent
   ) {
-    this.userService.isLogin(    
+    this.userService.isLogin(
       res=>{
       if(res!==false){
         this.isNotLogin = true
@@ -117,10 +119,13 @@ export class PricelistNegoPage implements OnInit {
       this.isLogin = true
       this.isNotLogin = false
       this.loginService.showLoginModal(res => {
-        console.log("Here the data",res)
+        console.log("Here the logout data",res)
+        let roleAbbr = res.data.result.obj.roleabbr
+        console.log("RoleAbbr",res.data.result.obj.roleabbr)
         this.userMail = localStorage.getItem("email")
         this.isLogin = false
         this.isNotLogin = true
+        this.appComponent.setMenuByRole(roleAbbr)
       })
     })
   }

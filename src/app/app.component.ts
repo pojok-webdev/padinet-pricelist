@@ -36,6 +36,7 @@ export class AppComponent {
   isNotLogin
   isLogin
   userMail
+  roleabbr
   obj = {
     createuser:''
   }
@@ -53,6 +54,8 @@ export class AppComponent {
         this.isNotLogin = true
         this.userMail = res.email
         this.obj.createuser = res.email
+        this.roleabbr = localStorage.getItem("roleabbr")
+        console.log("roleabbr",this.roleabbr)
         console.log("Ros",res)
       }else{
         this.isNotLogin = false

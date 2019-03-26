@@ -1,3 +1,10 @@
 .hydrated{
     text-align: center;
 }
+ion-item[isOdd='true'] > div.item-content{
+    background-color: yellow !important;
+}
+
+ion-item[isOdd='false'] > div.item-content{
+    background-color: orange !important;
+}

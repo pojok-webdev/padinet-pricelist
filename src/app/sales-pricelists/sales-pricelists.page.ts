@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { PricelistService } from '../pricelist.service';
+import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-sales-pricelists',
@@ -32,19 +35,49 @@ obj = {
   capacity:'',
   media_id:0,
   service_id:0,subservice_id:0,
-  basicprice:0,normalprice:0,bottomprice:0,upperprice:0
+  basicprice:0,normalprice:0,bottomprice:0,upperprice:0,createuser:''
 }
 capacities
 prices
+userMail
+isLogin
+isNotLogin
+
   constructor(
     private serviceService: ServiceService,
-    private priceList: PricelistService
+    private priceList: PricelistService,
+    private userService: UserService,
+    private loginService: LoginService,
+    private appComponent: AppComponent
   ) {
-    this.serviceService.getCategories(res => {
-      this.categories = res
-      this.hideMedia = true
-      this.hideSubService = true
-    })
+    this.userService.isLogin(
+      res=>{
+      if(res!==false){
+        this.isNotLogin = true
+        this.userMail = res.email
+        this.obj.createuser = res.email
+        console.log("Ros",res)
+        this.serviceService.getCategories(res => {
+          this.categories = res
+          this.hideMedia = true
+          this.hideSubService = true
+        })
+      }else{
+        this.isNotLogin = false
+        this.userMail = ''
+        console.log("Res",res)
+        this.loginService.showLoginModal(res => {
+          console.log("Here the data",res)
+          this.userMail = localStorage.getItem("email")
+          this.isLogin = false
+          this.isNotLogin = true
+          this.obj.createuser = localStorage.getItem("email")
+        })
+      }
+    });
+    this.isLogin = !this.isNotLogin
+
+
   }
   getCategories(){
     this.serviceService.getCategories(res => {
@@ -118,5 +151,21 @@ prices
   }
   ngOnInit() {
   }
-
+  doLogout(){
+    this.userService.doLogout({},res=>{
+      console.log("Res",res)
+      this.userMail = ""
+      this.isLogin = true
+      this.isNotLogin = false
+      this.loginService.showLoginModal(res => {
+        console.log("Here the logout data",res)
+        let roleAbbr = res.data.result.obj.roleabbr
+        console.log("RoleAbbr",res.data.result.obj.roleabbr)
+        this.userMail = localStorage.getItem("email")
+        this.isLogin = false
+        this.isNotLogin = true
+        this.appComponent.setMenuByRole(roleAbbr)
+      })
+    })
+  }
 }

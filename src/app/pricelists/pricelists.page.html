@@ -28,8 +28,7 @@
       <ion-label>Harga</ion-label>
       <ion-label>Aksi</ion-label>
     </ion-list-header>
-    <ion-menu-toggle auto-hide="false" *ngFor="let obj of objs">
-      <ion-item>
+      <ion-item  *ngFor="let obj of objs; let $index = index"  [color]="$index%2 != 0 ? 'medium' : 'light'">
         <ion-label>
             {{obj.servicename}}
         </ion-label>
@@ -45,6 +44,5 @@
           <ion-button (click)="doRemove(obj)">Hapus</ion-button>
         </ion-buttons>
       </ion-item>
-    </ion-menu-toggle>
   </ion-list>
 </ion-content>
