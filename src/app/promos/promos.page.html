@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>promos</ion-title>
-  </ion-toolbar>
+    <ion-title>Promo</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-button color="primary" (click)="showAddPage()">
+          Penambahan Promo
+        </ion-button>
+      </ion-buttons>
+      <ion-label slot="secondary">{{userMail}}</ion-label>
+      <ion-buttons slot="secondary">
+        <ion-button (click)="showModal()" [hidden]="isNotLogin">Login</ion-button>
+        <ion-button (click)="doLogout()" [hidden]="isLogin">Logout</ion-button>
+      </ion-buttons>
+      </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let promo of promos">
+      <ion-label>{{promo.name}}</ion-label>
+      <ion-button (click)="showDetail(promo)"><ion-icon name="more"></ion-icon></ion-button>
+      
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -15,10 +15,12 @@ import { PricelistUpdateComponent } from './pricelist-update/pricelist-update.co
 import { LoginComponent } from './login/login.component';
 import { SetpasswordComponent } from './setpassword/setpassword.component';
 import { QuotDetailComponent } from './quot-detail/quot-detail.component';
+import { PromoDetailComponent } from './promo-detail/promo-detail.component';
 @NgModule({
   declarations: [
     ConfirmationComponent,
     PricelistUpdateComponent,
+    PromoDetailComponent,
     LoginComponent,
     SetpasswordComponent,
     AppComponent,
@@ -27,6 +29,7 @@ import { QuotDetailComponent } from './quot-detail/quot-detail.component';
   entryComponents: [
     ConfirmationComponent,
     PricelistUpdateComponent,
+    PromoDetailComponent,
     SetpasswordComponent,
     LoginComponent,
     QuotDetailComponent

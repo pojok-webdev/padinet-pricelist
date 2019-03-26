@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'quotation-lists', loadChildren: './quotation-lists/quotation-lists.module#QuotationListsPageModule' },
   { path: 'promos', loadChildren: './promos/promos.module#PromosPageModule' },
   { path: 'sales-pricelists', loadChildren: './sales-pricelists/sales-pricelists.module#SalesPricelistsPageModule' },
+  { path: 'promo-add', loadChildren: './promo-add/promo-add.module#PromoAddPageModule' },
 ];
 
 @NgModule({
