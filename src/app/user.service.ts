@@ -18,9 +18,10 @@ export class UserService {
         console.log("Email to store",data)
         localStorage.setItem("email",data.obj.email)
         localStorage.setItem("hash",data.obj.hash)
-        localStorage.setItem("password",obj.password)
-        localStorage.setItem("role",obj.role)
-        localStorage.setItem("roleabbr",obj.roleabbr)
+        localStorage.setItem("password",data.obj.password)
+        localStorage.setItem("role",data.obj.role)
+        localStorage.setItem("roleabbr",data.obj.roleabbr)
+        localStorage.setItem("id",data.obj.id)
         callback(data)
       },
       err => {

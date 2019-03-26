@@ -4,6 +4,7 @@ import { LoginService } from '../login.service';
 import { PromoService } from '../promo.service';
 import { ModalController } from '@ionic/angular';
 import { PromoDetailComponent } from '../promo-detail/promo-detail.component';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-promos',
@@ -19,7 +20,8 @@ export class PromosPage implements OnInit {
     private userService: UserService,
     private loginService: LoginService,
     private promoService: PromoService,
-    private modalController:ModalController
+    private modalController:ModalController,
+    private appComponent: AppComponent
   ) {
     
     this.userService.isLogin(    
@@ -59,5 +61,22 @@ export class PromosPage implements OnInit {
     })
     _modal.onDidDismiss().then(out=>{})
     return await _modal.present()
+  }
+  doLogout(){
+    this.userService.doLogout({},res=>{
+      console.log("Res",res)
+      this.userMail = ""
+      this.isLogin = true
+      this.isNotLogin = false
+      this.loginService.showLoginModal(res => {
+        console.log("Here the logout data",res)
+        let roleAbbr = res.data.result.obj.roleabbr
+        console.log("RoleAbbr",res.data.result.obj.roleabbr)
+        this.userMail = localStorage.getItem("email")
+        this.isLogin = false
+        this.isNotLogin = true
+        this.appComponent.setMenuByRole(roleAbbr)
+      })
+    })
   }
 }

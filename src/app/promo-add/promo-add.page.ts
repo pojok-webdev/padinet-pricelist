@@ -17,7 +17,11 @@ export class PromoAddPage implements OnInit {
   constructor(
     private imageService: ImageService,
     private promoService: PromoService
-  ) { }
+  ) {
+    console.log("localStorage",localStorage.getItem("id"))
+    this.obj.createuser = localStorage.getItem("email")
+    this.obj.user_id = parseInt(localStorage.getItem("id"))
+  }
   openFile(obj,event){
     console.log("Data",event.target)
     let that = this
@@ -37,7 +41,9 @@ export class PromoAddPage implements OnInit {
     filereader.readAsDataURL(input.files[0]);
   }
   save(obj){
-    this.promoService.save(obj, result => {})
+    this.promoService.save(obj, result => {
+      window.location.href = '/promos'
+    })
   }
   ngOnInit() {
   }
