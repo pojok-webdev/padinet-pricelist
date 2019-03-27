@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'promos', loadChildren: './promos/promos.module#PromosPageModule' },
   { path: 'sales-pricelists', loadChildren: './sales-pricelists/sales-pricelists.module#SalesPricelistsPageModule' },
   { path: 'promo-add', loadChildren: './promo-add/promo-add.module#PromoAddPageModule' },
+  { path: 'promo-edit/:id', loadChildren: './promo-edit/promo-edit.module#PromoEditPageModule' },
 ];
 
 @NgModule({

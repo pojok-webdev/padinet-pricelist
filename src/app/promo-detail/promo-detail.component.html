@@ -20,4 +20,9 @@
     <img src="{{obj._img}}" alt="Gambar Tidak Tersedia" width="200">
   </ion-item>
 </ion-list>
-<ion-button (click)="closeDialog()">Tutup</ion-button>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button size="small" (click)="editPromo(obj)" color="primary">Edit</ion-button>
+      <ion-button size="small" (click)="closeDialog()" color="primary">Tutup</ion-button>          
+    </ion-buttons>
+  </ion-toolbar>

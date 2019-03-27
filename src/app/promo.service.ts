@@ -57,4 +57,18 @@ export class PromoService {
       }
     )
   }
+  get(obj,callback){
+    console.log("GET invoked")
+    this.obj = this.http.get<any>(this.appvar.serverport+'promoget/'+obj.id)
+    this.obj.subscribe(
+      data => {
+        console.log("Data",data)
+        callback(data)
+      },
+      err => {
+        console.log("Err",err)
+        callback(err)
+      }
+    )
+  }
 }

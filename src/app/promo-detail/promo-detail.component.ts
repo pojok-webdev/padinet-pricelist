@@ -27,4 +27,7 @@ obj
     console.log("done")
     this.modal.dismiss()
   }
+  editPromo(obj){
+    window.location.href = '/promo-edit/'+obj.id
+  }
 }
