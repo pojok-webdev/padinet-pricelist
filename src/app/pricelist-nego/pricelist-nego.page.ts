@@ -7,6 +7,8 @@ import { LoginService } from '../login.service';
 import { ModalController } from '@ionic/angular';
 import { LoginComponent } from '../login/login.component';
 import { AppComponent } from '../app.component';
+import { ServiceService } from '../service.service';
+import { PricelistService } from '../pricelist.service';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -28,7 +30,9 @@ export class PricelistNegoPage implements OnInit {
     clientaddress:'',
     activationtarget:'',
     img:'',
-    createuser:''
+    createuser:'',
+    category_id:0,
+    service_id:0,media_id:0,subservice_id:0,basicprice:0,normalprice:0,bottomprice:0,upperprice:0
   }
   services
   capacities
@@ -37,14 +41,24 @@ export class PricelistNegoPage implements OnInit {
   isNotLogin
   isLogin
   userMail
-
+  categories
+  subservices
+  subServices
+  hideSubService
+  hideMedia
+  noSubserviceLevel2
+  noMedia
+  noSubservice
+  subServicesLevel2
   constructor(
     private categoryservice: CategoryService,
     private custom: CustomsService,
     private imageService: ImageService,
     private userService: UserService,
     private loginService: LoginService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private serviceService: ServiceService,
+    private priceList: PricelistService
   ) {
     this.userService.isLogin(
       res=>{
@@ -53,6 +67,10 @@ export class PricelistNegoPage implements OnInit {
         this.userMail = res.email
         this.obj.createuser = res.email
         console.log("Ros",res)
+        this.serviceService.getCategories(result => {
+          console.log("Ctegories",result)
+          this.categories = result
+        })
       }else{
         this.isNotLogin = false
         this.userMail = ''
@@ -68,7 +86,72 @@ export class PricelistNegoPage implements OnInit {
     });
     this.isLogin = !this.isNotLogin
   }
-  
+  populateServices(){
+    console.log("category_id",this.obj.category_id)
+    if(this.obj.category_id == 2){
+      this.hideSubService = false
+      this.hideMedia = false
+    }
+    this.serviceService.getServicesbyCategory({category_id:this.obj.category_id},result => {
+      this.services = result
+    })
+  }
+  populateSubServices(){
+    this.serviceService.getSubServices({service_id:this.obj.service_id},result => {
+      this.subservices = result
+    })
+  }
+  getCapacities(){
+    console.log("get capacity OBJ",this.obj)
+    this.priceList.getcapacities(
+      {
+        category_id:this.obj.category_id,
+        service_id:this.obj.service_id,
+        subservice_id:this.obj.subservice_id,
+        media_id:this.obj.media_id
+      },result => {
+      this.capacities = result
+    })
+  }
+  getPrices(){
+    console.log('getPrices invoked')
+    this.priceList.getPrices(this.obj, result => {
+      console.log("getPrices RESULT",result)
+      console.log('OBJ',this.obj)
+      let res = result[0]
+      this.obj.basicprice = res.basicprice
+      this.obj.normalprice = res.normalprice
+      this.obj.bottomprice = res.bottomprice
+      this.obj.upperprice = res.upperprice
+    })
+  }
+  serviceChange(event){
+    let _service_id =  event.target.value
+    this.subServices = [{service_id:_service_id,name:'-',id:0}]
+    this.noSubserviceLevel2 = true
+    this.noMedia = true
+    this.serviceService.getSubServices({service_id:_service_id},result => {
+      console.log("Subservices",result)
+      this.noSubservice = false
+      if(result.length===0){
+        this.noSubservice = true
+      }
+      this.subServices = result
+    })
+  }
+  subServiceChange(event){
+    let _subservice_id = event.target.value
+    this.serviceService.getSubServicesLevel2({subservice_id:_subservice_id},result => {
+      this.noSubserviceLevel2 = false
+      this.noMedia = false
+      if(result.length === 0){
+        this.noSubserviceLevel2 = true
+        this.noMedia = true
+      }
+      this.subServicesLevel2 = result
+    })
+  }
+
   ngOnInit() {
   }
   changeCategory(obj){
@@ -76,7 +159,8 @@ export class PricelistNegoPage implements OnInit {
       this.services = result
     })
   }
-  changeCapacity(obj){
+  /*changeCapacity(obj){
+    console.log("getpa",obj)
     this.categoryservice.getcapacities(obj,result => {
       console.log("getcapacities",result)
       this.capacities = result
@@ -86,7 +170,7 @@ export class PricelistNegoPage implements OnInit {
     this.categoryservice.getprices(obj,result => {
       this.prices = result
     })
-  }
+  }*/
   save(obj){
     console.log("OBJ to save",obj)
     this.custom.save(obj,result => {

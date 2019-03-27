@@ -66,43 +66,52 @@
 </ion-item>
 <ion-item>
     <ion-label>Kategori</ion-label>
-    <ion-select [(ngModel)]="obj.category_id" placeholder="Pilih Kategori" interface="popover" (ionChange)="changeCategory(obj)">
-      <ion-select-option value="1">Broadband</ion-select-option>
-      <ion-select-option value="2">Dedicated</ion-select-option>
-      <ion-select-option value="3">Enterprise</ion-select-option>
+    <ion-select [(ngModel)]="obj.category_id" placeholder="Pilih Kategori" interface="popover" (ionChange)="populateServices()">
+      <ion-select-option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
       <ion-label>Layanan</ion-label>
-      <ion-select [(ngModel)]="obj.servicename_id" placeholder="Pilih Layanan" interface="popover" (ionChange)="changeCapacity(obj)">
+      <ion-select [(ngModel)]="obj.service_id" placeholder="Pilih Layanan" interface="popover" (ionChange)="populateSubServices()">
         <ion-select-option value="{{service.id}}" *ngFor="let service of services">{{service.name}}</ion-select-option>
       </ion-select>
   </ion-item>
-  <ion-item>
+  <ion-item [hidden]="hideSubService">
     <ion-label>Sub Layanan</ion-label>
-    <ion-select [(ngModel)]="obj.subservice_id" placeholder="Pilih Sub Layanan" interface="popover" (ionChange)="changeCapacity(obj)">
+    <ion-select [(ngModel)]="obj.subservice_id" placeholder="Pilih Sub Layanan" interface="popover">
       <ion-select-option value="{{service.id}}" *ngFor="let service of subservices">{{service.name}}</ion-select-option>
     </ion-select>
 </ion-item>
-<ion-item>
+<ion-item [hidden]="hideMedia">
     <ion-label>Media</ion-label>
-    <ion-select [(ngModel)]="obj.media_id" placeholder="Pilih Media" interface="popover" (ionChange)="changeCapacity(obj)">
+    <ion-select [(ngModel)]="obj.media_id" placeholder="Pilih Media" interface="popover" (ionChange)="getCapacities()">
       <ion-select-option value="1">Wireless</ion-select-option>
       <ion-select-option value="2">FO</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label>Kapasitas</ion-label>
-    <ion-select [(ngModel)]="obj.capacity" placeholder="Pilih Kapasitas" interface="popover">
+    <ion-select [(ngModel)]="obj.capacity" placeholder="Pilih Kapasitas" interface="popover" (ionChange)="getPrices()">
       <ion-select-option value="{{capacity.capacity}}" *ngFor="let capacity of capacities">
         {{capacity.capacity}}
       </ion-select-option>
     </ion-select>
-  </ion-item>  
+  </ion-item>
+  <ion-item>
+    <ion-label>Harga Pricelist:</ion-label>
+    <ion-input [(ngModel)]="obj.normalprice" placeholder="Harga Pricelist"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label>Harga Nego Pertama:</ion-label>
+    <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Nego Pertama"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label>Harga Nego Kedua:</ion-label>
+    <ion-input [(ngModel)]="obj.upperprice" placeholder="Harga Nego Kedua"></ion-input>
+  </ion-item>
   <ion-item>
     <ion-label>Harga Pengajuan Custom</ion-label>
     <ion-input [(ngModel)]="obj.customprice" placeholder="Harga Yang diajukan"></ion-input>
   </ion-item>
   <ion-button (click)="save(obj)">Simpan</ion-button>
-
 </ion-content>
