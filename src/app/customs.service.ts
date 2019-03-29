@@ -31,8 +31,30 @@ private obj:Observable<any>
       }
     )
   }
+  getById(obj,callback){
+    this.obj = this.http.get<any>(this.appvar.serverport+'customgetbyid/'+obj.id)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
   getByMonth(obj,callback){
     this.obj = this.http.get<any>(this.appvar.serverport+'getbymonth/'+obj.monthyear)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
+  setApprove(obj,callback){
+    this.obj = this.http.get<any>(this.appvar.serverport+'setapprove/'+obj.id+'/'+obj.approved)
     this.obj.subscribe(
       data => {
         callback(data)

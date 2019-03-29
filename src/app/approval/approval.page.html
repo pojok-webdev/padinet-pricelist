@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>approval</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Nama</ion-label>
+    <ion-label>{{obj.clientname}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Cabang</ion-label>
+    <ion-label>{{obj.branch}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Alamat</ion-label>
+    <ion-label>{{obj.clientaddress}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Kategori</ion-label>
+    <ion-label>{{obj.category}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Layanan</ion-label>
+    <ion-label>{{obj.service}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Media</ion-label>
+    <ion-label>{{obj.media}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Alasan</ion-label>
+    <ion-label>{{obj.reason}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Target Aktivasi</ion-label>
+    <ion-label>{{obj.activationtarget}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tanggal Penawaran</ion-label>
+    <ion-label>{{obj.quotation_date}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Harga yang diajukan</ion-label>
+    <ion-label>{{obj.customprice}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Gambar Bukti</ion-label>
+    <img src="{{obj._img}}" />
+  </ion-item>
+
+  <ion-button (click)="setApprove(obj)">Approve</ion-button>
+</ion-content>

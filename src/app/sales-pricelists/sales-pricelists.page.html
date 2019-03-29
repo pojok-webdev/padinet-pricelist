@@ -19,7 +19,7 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="hideService">
       <ion-label>Nama Layanan:</ion-label>
       <ion-select [(ngModel)]="obj.service_id" placeholder="Nama Layanan" interface="popover" (ionChange)="populateSubServices()">
           <ion-select-option *ngFor="let service of services" value="{{service.id}}">
@@ -29,7 +29,7 @@
       </ion-item>
       <ion-item [hidden]="hideSubService">
         <ion-label>Nama Sub Layanan:</ion-label>
-        <ion-select [(ngModel)]="obj.subservice_id" placeholder="Nama Sub Layanan" interface="popover">
+        <ion-select [(ngModel)]="obj.subservice_id" placeholder="Nama Sub Layanan" interface="popover" (ionChange)="populateMedias(obj)">
           <ion-select-option *ngFor="let service of subservices" value="{{service.id}}">
               {{service.name}}
           </ion-select-option>
@@ -38,35 +38,28 @@
       <ion-item [hidden]="hideMedia">
       <ion-label>Media:</ion-label>
       <ion-select [(ngModel)]="obj.media_id" placeholder="Media" interface="popover" (ionChange)="getCapacities()">
-        <ion-select-option value="1">
-          Wireless
-        </ion-select-option>
-        <ion-select-option value="2">
-          FO
+        <ion-select-option value="{{media.id}}" *ngFor="let media of medias">
+          {{media.name}}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="hideCapacity">
       <ion-label>Kapasitas:</ion-label>
       <ion-select [(ngModel)]="obj.capacity" placeholder="Kapasitas" interface="popover" (ionChange)="getPrices()">
         <ion-select-option *ngFor="let capacity of capacities" value="{{capacity.capacity}}">{{capacity.capacity}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
-        <ion-label>Kompetisi:</ion-label>
-      <ion-input [(ngModel)]="obj.basicprice" placeholder="Kompetisi"></ion-input>
-    </ion-item>
-    <ion-item>
+    <ion-item [hidden]="hidePrice">
         <ion-label>Harga Pricelist:</ion-label>
       <ion-input [(ngModel)]="obj.normalprice" placeholder="Harga Pricelist"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="hidePrice">
         <ion-label>Harga Nego Pertama:</ion-label>
-      <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Nego Pertama"></ion-input>
+      <ion-input [(ngModel)]="obj.upperprice" placeholder="Harga Nego Pertama"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="hidePrice">
         <ion-label>Harga Nego Kedua:</ion-label>
-      <ion-input [(ngModel)]="obj.upperprice" placeholder="Harga Nego Kedua"></ion-input>
+      <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Nego Kedua"></ion-input>
     </ion-item>
   </ion-list>
   <ion-button (click)="save(obj)">Simpan</ion-button>

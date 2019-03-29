@@ -18,31 +18,27 @@
 
 <ion-content padding>
   <ion-list >
-    <ion-list-header color="medium">
-      <ion-label>Nama</ion-label>
-      <ion-label>Kapasitas</ion-label>
-      <ion-label>Media</ion-label>
-      <ion-label>Pricelist</ion-label>
-      <ion-label>Nego 1</ion-label>
-      <ion-label>Nego 2</ion-label>
-      <ion-label>Harga</ion-label>
-      <ion-label>Aksi</ion-label>
-    </ion-list-header>
-      <ion-item  *ngFor="let obj of objs; let $index = index"  [color]="$index%2 != 0 ? 'medium' : 'light'">
-        <ion-label>
-            {{obj.servicename}}
-        </ion-label>
-        <ion-label>{{obj.capacity}}</ion-label>
+<ion-item color="primary">
+  <ion-label>Kategori</ion-label>
+  <ion-label>Nama</ion-label>
+  <ion-label>Subservice</ion-label>
+  <ion-label>Media</ion-label>
+  <ion-label>Kapasitas</ion-label>
+  <ion-label>Pricelist</ion-label>
+  <ion-label>Nego 1</ion-label>
+  <ion-label>Nego 2</ion-label>
+  <ion-label>Harga</ion-label>
+</ion-item>
+    <ion-item  *ngFor="let obj of objs; let $index = index"  [color]="$index%2 != 0 ? 'medium' : 'light'">
+        <ion-label>{{obj.category}}</ion-label>
+        <ion-label>{{obj.servicename}}</ion-label>
+        <ion-label>{{obj.subservice}}</ion-label>
         <ion-label>{{obj.media}}</ion-label>
+        <ion-label>{{obj.capacity}}</ion-label>
         <ion-label>{{obj.normalprice| number:'':'en-EN'}}</ion-label>
-        <ion-label>{{obj.bottomprice| number:'':'en-EN'}}</ion-label>
         <ion-label>{{obj.upperprice| number:'':'en-EN'}}</ion-label>
+        <ion-label>{{obj.bottomprice| number:'':'en-EN'}}</ion-label>
         <ion-label>{{obj.basicprice| number:'':'en-EN'}}</ion-label>
-        <ion-buttons>
-          <ion-button (click)="doEdit(obj)">Edit</ion-button>
-          <ion-button (click)="doNego(obj)">Nego</ion-button>
-          <ion-button (click)="doRemove(obj)">Hapus</ion-button>
-        </ion-buttons>
       </ion-item>
   </ion-list>
 </ion-content>

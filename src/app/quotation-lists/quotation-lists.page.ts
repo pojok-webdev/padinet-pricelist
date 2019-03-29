@@ -18,6 +18,7 @@ export class QuotationListsPage implements OnInit {
   isNotLogin
   isLogin
   userMail
+  roleabbr
   constructor(
     private custom: CustomsService,
     private modalController: ModalController,
@@ -36,6 +37,9 @@ export class QuotationListsPage implements OnInit {
           this.isNotLogin = true
           this.userMail = res.email
           console.log("Ros",res)
+          this.roleabbr = localStorage.getItem("roleabbr")
+          console.log("roleabbr",this.roleabbr)
+          this.appComponent.setMenuByRole(this.roleabbr)  
         }else{
           this.isNotLogin = false
           this.userMail = ''

@@ -53,6 +53,21 @@ export class PricelistService {
       }
     )
   }
+  getMedias(obj,callback){
+    this.obj = this.http
+    .get<any>(this.appvar.serverport+'pricelistgetmedia/'+obj.category_id+'/'+obj.service_id+'/'+obj.subservice_id)
+    this.obj.subscribe(
+      data => {
+        console.log("Prices Media",data)
+        callback(data)
+      },
+      err => {
+        console.log("Err",err)
+        callback(err)
+      }
+    )
+  }
+  
   save(obj,callback){
     this.obj = this.http.post<any>(this.appvar.serverport+'pricelistsave',obj)
     this.obj.subscribe(

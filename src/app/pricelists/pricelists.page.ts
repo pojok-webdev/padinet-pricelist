@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { PricelistUpdateComponent } from '../pricelist-update/pricelist-update.component';
 import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-pricelists',
@@ -15,23 +16,26 @@ objs
 isLogin
 isNotLogin
 userMail
+roleabbr
   constructor(
     private priceList:PricelistService,
     private modalcontroller: ModalController,
     private userService: UserService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private appComponent: AppComponent
   ) {
     this.priceList.gets(result=>{
       console.log("Result",result)
       this.objs = result
     })
-
-
     this.userService.isLogin(    
       res=>{
       if(res!==false){
         this.isNotLogin = true
         this.userMail = res.email
+        this.roleabbr = localStorage.getItem("roleabbr")
+        console.log("roleabbr",this.roleabbr)
+        this.appComponent.setMenuByRole(this.roleabbr)
         console.log("Ros",res)
       }else{
         this.isNotLogin = false
@@ -46,7 +50,6 @@ userMail
       }
     });
     this.isLogin = !this.isNotLogin
-
   }
   showAddPage(){
     window.location.href = '/pricelist-add'
@@ -114,5 +117,4 @@ userMail
       })
     })
   }
-
 }

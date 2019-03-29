@@ -16,6 +16,7 @@ export class PromosPage implements OnInit {
   isNotLogin
   userMail
   promos
+  roleabbr
   constructor(
     private userService: UserService,
     private loginService: LoginService,
@@ -30,6 +31,10 @@ export class PromosPage implements OnInit {
         this.isNotLogin = true
         this.userMail = res.email
         console.log("Ros",res)
+        this.roleabbr = localStorage.getItem("roleabbr")
+        console.log("roleabbr",this.roleabbr)
+        this.appComponent.setMenuByRole(this.roleabbr)
+
         this.promoService.gets(res => {
           this.promos = res
         })
