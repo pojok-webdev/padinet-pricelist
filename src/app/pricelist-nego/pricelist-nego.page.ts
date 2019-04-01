@@ -4,8 +4,6 @@ import { CustomsService } from '../customs.service';
 import { ImageService } from '../image.service';
 import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
-import { ModalController } from '@ionic/angular';
-import { LoginComponent } from '../login/login.component';
 import { AppComponent } from '../app.component';
 import { ServiceService } from '../service.service';
 import { PricelistService } from '../pricelist.service';
@@ -33,6 +31,7 @@ export class PricelistNegoPage implements OnInit {
     createuser:'',
     category_id:0,
     service_id:0,media_id:0,subservice_id:0,basicprice:0,normalprice:0,bottomprice:0,upperprice:0,
+    basicpricef:0,normalpricef:0,bottompricef:0,upperpricef:0,
     reason:'',otherreason:'',reasoning:''
   }
   medias = [{id:1,name:"Wireless"},{id:2,name:"FO"}]
@@ -55,6 +54,7 @@ export class PricelistNegoPage implements OnInit {
   hidePrice
   hideCapacity
   hideService
+  hideOtherReason
   roleabbr
   constructor(
     private categoryservice: CategoryService,
@@ -66,6 +66,7 @@ export class PricelistNegoPage implements OnInit {
     private serviceService: ServiceService,
     private priceList: PricelistService
   ) {
+    this.hideOtherReason = true
     this.userService.isLogin(
       res=>{
       if(res!==false){
@@ -76,7 +77,6 @@ export class PricelistNegoPage implements OnInit {
         this.roleabbr = localStorage.getItem("roleabbr")
         console.log("roleabbr",this.roleabbr)
         this.appComponent.setMenuByRole(this.roleabbr)
-
         this.serviceService.getCategories(result => {
           console.log("Ctegories",result)
           this.categories = result
@@ -107,61 +107,6 @@ export class PricelistNegoPage implements OnInit {
       }
     });
   }
-/*  populateServices(){
-    this.getvalbykey(this.categories,this.obj.category_id,result => {
-      console.log("CATEGORY",result)
-      this.obj.category = result
-    })
-    console.log('Category name',this.categories[this.obj.category_id])
-    console.log("category_id",this.obj.category_id)
-    if(this.obj.category_id == 2){
-      this.hideSubService = false
-      this.hideMedia = false
-    }
-    this.serviceService.getServicesbyCategory({category_id:this.obj.category_id},result => {
-      this.services = result
-    })
-    
-  }
-  populateSubServices(){
-    this.getvalbykey(this.services,this.obj.service_id,result => {
-      console.log("SERVICE",result)
-      this.obj.service = result
-    })
-    this.serviceService.getSubServices({service_id:this.obj.service_id},result => {
-      this.subservices = result
-    })
-  }*/
-  /*getCapacities(){
-    this.getvalbykey(this.medias,this.obj.media_id,result => {
-      console.log("MEDIA",result)
-      this.obj.media = result
-    })
-
-    console.log("get capacity OBJ",this.obj)
-    this.priceList.getcapacities(
-      {
-        category_id:this.obj.category_id,
-        service_id:this.obj.service_id,
-        subservice_id:this.obj.subservice_id,
-        media_id:this.obj.media_id
-      },result => {
-      this.capacities = result
-    })
-  }
-  getPrices(){
-
-    console.log('getPrices invoked')
-    this.priceList.getPrices(this.obj, result => {
-      console.log("getPrices RESULT",result)
-      console.log('OBJ',this.obj)
-      let res = result[0]
-      this.obj.basicprice = res.basicprice
-      this.obj.normalprice = res.normalprice
-      this.obj.bottomprice = res.bottomprice
-      this.obj.upperprice = res.upperprice
-    })
-  }*/
   serviceChange(event){
     let _service_id =  event.target.value
     this.subServices = [{service_id:_service_id,name:'-',id:0}]
@@ -196,18 +141,6 @@ export class PricelistNegoPage implements OnInit {
       this.services = result
     })
   }
-  /*changeCapacity(obj){
-    console.log("getpa",obj)
-    this.categoryservice.getcapacities(obj,result => {
-      console.log("getcapacities",result)
-      this.capacities = result
-    })
-  }
-  getPrices(obj){
-    this.categoryservice.getprices(obj,result => {
-      this.prices = result
-    })
-  }*/
   save(obj){
     console.log("OBJ to save",obj)
     this.custom.save(obj,result => {
@@ -323,11 +256,17 @@ export class PricelistNegoPage implements OnInit {
       console.log('OBJ',this.obj)
       let res = result[0]
       this.hidePrice = false
-      this.obj.basicprice = res.basicprice
-      this.obj.normalprice = res.normalprice
-      this.obj.bottomprice = res.bottomprice
-      this.obj.upperprice = res.upperprice
+      this.obj.basicprice = res.basicpricef
+      this.obj.normalprice = res.normalpricef
+      this.obj.bottomprice = res.bottompricef
+      this.obj.upperprice = res.upperpricef
     })}
   }
-
+  showOtherReason(){
+    this.obj.otherreason = ""
+    this.hideOtherReason = true
+    if(this.obj.reason === "lainnya"){
+      this.hideOtherReason = false
+    }
+  }
 }

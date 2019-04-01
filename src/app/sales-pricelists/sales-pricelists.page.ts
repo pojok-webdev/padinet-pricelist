@@ -36,7 +36,8 @@ obj = {
   capacity:'',
   media_id:0,
   service_id:0,subservice_id:0,
-  basicprice:0,normalprice:0,bottomprice:0,upperprice:0,createuser:''
+  basicprice:0,normalprice:0,bottomprice:0,upperprice:0,
+  basicpricef:0,normalpricef:0,bottompricef:0,upperpricef:0,createuser:''
 }
 capacities
 prices
@@ -159,10 +160,10 @@ isNotLogin
       console.log('OBJ',this.obj)
       let res = result[0]
       this.hidePrice = false
-      this.obj.basicprice = res.basicprice
-      this.obj.normalprice = res.normalprice
-      this.obj.bottomprice = res.bottomprice
-      this.obj.upperprice = res.upperprice
+      this.obj.basicprice = res.basicpricef
+      this.obj.normalprice = res.normalpricef
+      this.obj.bottomprice = res.bottompricef
+      this.obj.upperprice = res.upperpricef
     })}
   }
   ngOnInit() {

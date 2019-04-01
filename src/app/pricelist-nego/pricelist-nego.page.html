@@ -30,10 +30,6 @@
     <ion-input placeholder="Nama Pelanggan" [(ngModel)]="obj.clientname"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-label>Alasan</ion-label>
-  <ion-input placeholder="Alasan Penawaran" [(ngModel)]="obj.reason"></ion-input>
-</ion-item>
-<ion-item>
   <ion-label>Nama PIC</ion-label>
   <ion-input placeholder="Nama PIC" [(ngModel)]="obj.clientpic"></ion-input>
 </ion-item>
@@ -116,7 +112,7 @@
 </ion-item>
 <ion-item>
   <ion-label>Alasan</ion-label>
-  <ion-select [(ngModel)] = "reason">
+  <ion-select [(ngModel)] = "obj.reason" (ionChange)="showOtherReason()" interface="popover">
     <ion-select-option value="kompetitor">Kompetitor</ion-select-option>
     <ion-select-option value="kontrak minimum 2 tahun">Kontrak Minimum 2 tahun</ion-select-option>
     <ion-select-option value="punya akun existing">Punya Akun Existing</ion-select-option>
@@ -125,11 +121,11 @@
 </ion-item>
 <ion-item>
   <ion-label>Alasan Lain</ion-label>
-  <ion-input [(ngModel)]="otherreason"></ion-input>
+  <ion-input [(ngModel)]="obj.otherreason"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label>Pertimbangan Pengajuan Angka tersebut</ion-label>
-  <ion-input [(ngModel)]="reasoning"></ion-input>
+  <ion-input [(ngModel)]="obj.reasoning"></ion-input>
 </ion-item>
 <ion-item>
     <ion-label>Harga Pengajuan Custom</ion-label>
