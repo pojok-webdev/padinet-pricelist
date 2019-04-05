@@ -37,6 +37,9 @@ roleabbr
         console.log("roleabbr",this.roleabbr)
         this.appComponent.setMenuByRole(this.roleabbr)
         console.log("Ros",res)
+        if(this.roleabbr === "AM"){
+          window.location.href = "/sales-pricelists"
+        }
       }else{
         this.isNotLogin = false
         this.userMail = ''
@@ -46,7 +49,11 @@ roleabbr
           this.userMail = localStorage.getItem("email")
           this.isLogin = false
           this.isNotLogin = true
-        })
+          this.roleabbr = localStorage.getItem("roleabbr")
+          if(this.roleabbr === "AM"){
+            window.location.href = "/sales-pricelists"
+          }
+          })
       }
     });
     this.isLogin = !this.isNotLogin
@@ -114,6 +121,18 @@ roleabbr
         this.userMail = localStorage.getItem("email")
         this.isLogin = false
         this.isNotLogin = true
+        this.appComponent.setMenuByRole(this.roleabbr)
+        console.log("Ros",res)
+        this.roleabbr = localStorage.getItem("roleabbr")
+        if(this.roleabbr === "AM"){
+          window.location.href = "/sales-pricelists"
+        }
+        if((this.roleabbr==="AM")||(this.roleabbr==="DM")){
+          window.location.href = '/sales-pricelists'
+        }else{
+          window.location.href = '/pricelists'
+        }
+
       })
     })
   }

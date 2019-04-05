@@ -54,7 +54,7 @@ private obj:Observable<any>
     )
   }
   setApprove(obj,callback){
-    this.obj = this.http.get<any>(this.appvar.serverport+'setapprove/'+obj.id+'/'+obj.approved)
+    this.obj = this.http.post<any>(this.appvar.serverport+'setapprove',obj)
     this.obj.subscribe(
       data => {
         callback(data)

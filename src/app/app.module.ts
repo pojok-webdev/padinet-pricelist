@@ -16,6 +16,9 @@ import { LoginComponent } from './login/login.component';
 import { SetpasswordComponent } from './setpassword/setpassword.component';
 import { QuotDetailComponent } from './quot-detail/quot-detail.component';
 import { PromoDetailComponent } from './promo-detail/promo-detail.component';
+import { ApprovalPipe } from './approval.pipe';
+import { ApprovalConfirmationComponent } from './approval-confirmation/approval-confirmation.component';
+import { ApprovalModalComponent } from './approval-modal/approval-modal.component';
 @NgModule({
   declarations: [
     ConfirmationComponent,
@@ -24,7 +27,10 @@ import { PromoDetailComponent } from './promo-detail/promo-detail.component';
     LoginComponent,
     SetpasswordComponent,
     AppComponent,
-    QuotDetailComponent
+    QuotDetailComponent,
+    ApprovalConfirmationComponent,
+    ApprovalModalComponent,
+    ApprovalPipe
   ],
   entryComponents: [
     ConfirmationComponent,
@@ -32,7 +38,9 @@ import { PromoDetailComponent } from './promo-detail/promo-detail.component';
     PromoDetailComponent,
     SetpasswordComponent,
     LoginComponent,
-    QuotDetailComponent
+    QuotDetailComponent,
+    ApprovalConfirmationComponent,
+    ApprovalModalComponent
   ],
   imports: [
     BrowserModule,

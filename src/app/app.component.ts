@@ -26,11 +26,6 @@ export class AppComponent {
       title: 'Histori Pengajuan Harga',
       url: '/quotation-lists',
       icon: 'list'
-    },
-    {
-      title: 'Promo',
-      url: '/promos',
-      icon: 'list'
     }
   ];
   isNotLogin
@@ -82,28 +77,52 @@ export class AppComponent {
   }
   setMenuByRole(roleAbbr){
     let priceInfoLabel = 'Informasi Harga'
+    let pricelisturl = ''
+    let promo = ''
+    let promoTitle = ''
+    let promoIcon = ''
     switch(roleAbbr){
       case 'Adm':
       priceInfoLabel = 'Informasi Harga (Admin)'
+      pricelisturl = '/pricelists'
+      promo = '/promos'
+      promoIcon = 'list'
+      promoTitle = 'Promo'
       break
       case 'AM':
       priceInfoLabel = 'Informasi Harga (AM)'
+      pricelisturl = '/sales-pricelists'
+      promo = '/'
+      promoIcon = ''
+      promoTitle = ''
       break
       case 'SM':
       priceInfoLabel = 'Informasi Harga (SM)'
+      pricelisturl = '/pricelists'
+      promo = '/promos'
+      promoIcon = 'list'
+      promoTitle = 'Promo'
       break
       case 'GM':
       priceInfoLabel = 'Informasi Harga (GM)'
+      pricelisturl = '/pricelists'
+      promo = '/promos'
+      promoIcon = 'list'
+      promoTitle = 'Promo'
       break
       case 'DM':
       priceInfoLabel = 'Informasi Harga (DM)'
+      pricelisturl = '/sales-pricelists'
+      promo = '/'
+      promoIcon = 'list'
+      promoTitle = 'Promo'
       break
     }
     console.log("Price Info Label",priceInfoLabel)
     this.appPages = [
       {
         title: priceInfoLabel,
-        url: '/sales-pricelists',
+        url: pricelisturl,
         icon: 'list'
       },
       {
@@ -115,11 +134,10 @@ export class AppComponent {
         title: 'Histori Pengajuan Harga',
         url: '/quotation-lists',
         icon: 'list'
-      },
-      {
-        title: 'Promo',
-        url: '/promos',
-        icon: 'list'
+      },{
+        title: promoTitle,
+        url:promo,
+        icon: promoIcon
       }
     ];
   }

@@ -44,7 +44,7 @@ prices
 userMail
 isLogin
 isNotLogin
-
+roleabbr
   constructor(
     private serviceService: ServiceService,
     private priceList: PricelistService,
@@ -59,6 +59,8 @@ isNotLogin
         this.userMail = res.email
         this.obj.createuser = res.email
         console.log("Ros",res)
+        this.roleabbr = localStorage.getItem("roleabbr")
+
         this.serviceService.getCategories(res => {
           this.categories = res
           this.hideSubService = true
@@ -67,16 +69,24 @@ isNotLogin
           this.hideService = true
           this.hidePrice = true
         })
+        if((this.roleabbr === "SM")||(this.roleabbr === "GM")||(this.roleabbr === "Adm")){
+          window.location.href = "/pricelists"
+        }
+
       }else{
         this.isNotLogin = false
         this.userMail = ''
         console.log("Res",res)
         this.loginService.showLoginModal(res => {
-          console.log("Here the data",res)
+          console.log("Here the data",res.result)
           this.userMail = localStorage.getItem("email")
           this.isLogin = false
           this.isNotLogin = true
           this.obj.createuser = localStorage.getItem("email")
+          if((this.roleabbr === "SM")||(this.roleabbr === "GM")||(this.roleabbr === "Adm")){
+            window.location.href = "/pricelists"
+          }
+  
         })
       }
     });
@@ -182,6 +192,11 @@ isNotLogin
         this.isLogin = false
         this.isNotLogin = true
         this.appComponent.setMenuByRole(roleAbbr)
+                this.roleabbr = localStorage.getItem("roleabbr")
+                if((this.roleabbr === "SM")||(this.roleabbr === "GM")||(this.roleabbr === "Adm")){
+                  window.location.href = "/pricelists"
+                }
+      
       })
     })
   }

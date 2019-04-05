@@ -66,6 +66,10 @@
     <ion-input [(ngModel)] = "obj.unapprovalreason"></ion-input>
   </ion-item>
   
-
+  <ion-item [hidden]="hideApprovedPrice">
+    <ion-label>Harga yang diapprove</ion-label>
+    <ion-input [(ngModel)] = "obj.approvedprice"></ion-input>
+  </ion-item>
+  
   <ion-button (click)="setApprove(obj)">Simpan</ion-button>
 </ion-content>

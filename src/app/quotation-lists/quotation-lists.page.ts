@@ -6,7 +6,7 @@ import { QuotDetailComponent } from '../quot-detail/quot-detail.component';
 import { UserService } from '../user.service'
 import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
-
+import { ApprovalModalComponent } from '../approval-modal/approval-modal.component';
 @Component({
   selector: 'app-quotation-lists',
   templateUrl: './quotation-lists.page.html',
@@ -19,6 +19,7 @@ export class QuotationListsPage implements OnInit {
   isLogin
   userMail
   roleabbr
+  hidecantApprove
   constructor(
     private custom: CustomsService,
     private modalController: ModalController,
@@ -30,7 +31,7 @@ export class QuotationListsPage implements OnInit {
     console.log("Email",email)
     this.custom.gets(result => {
       this.quotations = result
-    })
+})
     this.userService.isLogin(
       res=>{
         if(res!==false){
@@ -40,6 +41,12 @@ export class QuotationListsPage implements OnInit {
           this.roleabbr = localStorage.getItem("roleabbr")
           console.log("roleabbr",this.roleabbr)
           this.appComponent.setMenuByRole(this.roleabbr)  
+          if((this.roleabbr==="AM")||(this.roleabbr==="DM")){
+            this.hidecantApprove = true
+          }else{
+            this.hidecantApprove = false
+          }
+  
         }else{
           this.isNotLogin = false
           this.userMail = ''
@@ -48,7 +55,7 @@ export class QuotationListsPage implements OnInit {
             console.log("Here your data",res)
             this.custom.gets(result => {
               this.quotations = result
-            })
+                    })
             this.userMail = localStorage.getItem("email")
             this.isLogin = false
             this.isNotLogin = true
@@ -109,6 +116,16 @@ export class QuotationListsPage implements OnInit {
     modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
     return await modal.present()
   }
+  async showApprovalPage(quotation){
+    const modal = await this.modalController.create({
+      component:ApprovalModalComponent,
+      componentProps:{
+        obj:quotation
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
+    return await modal.present()
+  }
   doLogout(){
     this.userService.doLogout({},res=>{
       console.log("Res",res)
@@ -123,6 +140,13 @@ export class QuotationListsPage implements OnInit {
         this.isLogin = false
         this.isNotLogin = true
         this.appComponent.setMenuByRole(roleAbbr)
+        if((roleAbbr==="AM")||(roleAbbr==="DM")){
+          this.hidecantApprove = true
+          window.location.href = '/sales-pricelists'
+        }else{
+          this.hidecantApprove = false
+          window.location.href = '/pricelists'
+        }
       })
     })
   }

@@ -81,6 +81,13 @@ export class PromosPage implements OnInit {
         this.isLogin = false
         this.isNotLogin = true
         this.appComponent.setMenuByRole(roleAbbr)
+        this.roleabbr = localStorage.getItem("roleabbr")
+        if((this.roleabbr==="AM")||(this.roleabbr==="DM")){
+          window.location.href = '/sales-pricelists'
+        }else{
+          window.location.href = '/pricelists'
+        }
+
       })
     })
   }
