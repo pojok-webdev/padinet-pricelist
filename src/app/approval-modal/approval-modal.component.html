@@ -56,6 +56,11 @@
   </ion-item>
 
   <ion-item>
+    <ion-label>Status Approval</ion-label>
+    <ion-label color="{{obj.statuscolor}}">{{obj.approvalstring}}</ion-label>
+  </ion-item>
+
+  <ion-item [hidden]="hideApproval">
     <ion-button (click)="displayReason({displayStatus:true,approved:'1'});changeColor({approveColor:'warning',unApproveColor:'light'});" color="{{approveColor}}">Approve</ion-button>
     <ion-button (click)="displayReason({displayStatus:false,approved:'0'});changeColor({approveColor:'light',unApproveColor:'warning'});" color="{{unApproveColor}}">Tidak Approve</ion-button>
   </ion-item>

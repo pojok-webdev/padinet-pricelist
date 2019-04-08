@@ -31,6 +31,23 @@ export class QuotationListsPage implements OnInit {
     console.log("Email",email)
     this.custom.gets(result => {
       this.quotations = result
+      this.quotations.forEach(quotation => {
+        switch(quotation.approved){
+          case '0':
+          quotation.statuscolor = "danger"
+          quotation.hideUnapprovalReason = false
+          break
+          case '1':
+          quotation.statuscolor = "success"
+          quotation.hideUnapprovalReason = true
+          break
+          default:
+          quotation.statuscolor = "warning"
+          quotation.hideUnapprovalReason = true
+          break
+        }
+      });
+      console.log('quotation',this.quotations)
 })
     this.userService.isLogin(
       res=>{
@@ -55,7 +72,23 @@ export class QuotationListsPage implements OnInit {
             console.log("Here your data",res)
             this.custom.gets(result => {
               this.quotations = result
-                    })
+              this.quotations.forEach(quotation => {
+                switch(quotation.approved){
+                  case '0':
+                  quotation.statuscolor = "danger"
+                  quotation.hideUnapprovalReason = false
+                  break
+                  case '1':
+                  quotation.statuscolor = "success"
+                  quotation.hideUnapprovalReason = true
+                  break
+                  default:
+                  quotation.statuscolor = "warning"
+                  quotation.hideUnapprovalReason = true
+                  break
+                }
+              });
+            })
             this.userMail = localStorage.getItem("email")
             this.isLogin = false
             this.isNotLogin = true
@@ -64,7 +97,18 @@ export class QuotationListsPage implements OnInit {
     });
     this.isLogin = !this.isNotLogin
   }
-
+  getStatusColor(status){
+    console.log("Status",status)
+    let _color = 'warning'
+    switch(status){
+      case '0':
+        _color = 'danger'
+      break
+      case '1':
+      _color = 'success'
+    }
+    return _color
+  } 
   ngOnInit() {
   }
   handleModalDismiss(d){
@@ -82,9 +126,6 @@ export class QuotationListsPage implements OnInit {
       }
     })
     modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
-    //const {data} = await modal.onDidDismiss()
-    //console.log("Data",data)
-
 
     return await modal.present()
   }

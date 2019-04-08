@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>pricelist-nego {{obj.normalprice}}</ion-title>
+    <ion-title>Pengajuan Harga {{obj.normalprice}}</ion-title>
     <ion-label slot="secondary">{{userMail}}</ion-label>
     <ion-buttons slot="secondary">
       <ion-button (click)="showModal()" [hidden]="isNotLogin">Login</ion-button>
@@ -12,7 +12,11 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Tanggal Penawaran</ion-label>
-    <ion-datetime [(ngModel)]="obj.quotation_date" display-format="YYYY-MM-DD" picker-format="DD MMMM YYYY" placeholder="Pilih Tanggal Penawaran">
+    <ion-datetime 
+    [(ngModel)]="obj.quotation_date" 
+    display-format="YYYY-MM-DD" 
+    picker-format="DD MMMM YYYY" 
+    placeholder="Pilih Tanggal Penawaran" interface="popover">
 
     </ion-datetime>
   </ion-item>

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>pricelist-add</ion-title>
+    <ion-title>Informasi Harga</ion-title>
     <ion-label slot="secondary">{{userMail}}</ion-label>
     <ion-buttons slot="secondary">
       <ion-button (click)="showModal()" [hidden]="isNotLogin">Login</ion-button>
@@ -62,6 +62,5 @@
       <ion-input [(ngModel)]="obj.bottomprice" placeholder="Harga Nego Kedua"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button (click)="save(obj)">Simpan</ion-button>
 
 </ion-content>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
 import { CustomsService } from '../customs.service';
 import { ApprovalConfirmationComponent } from '../approval-confirmation/approval-confirmation.component';
 
@@ -12,16 +11,22 @@ import { ApprovalConfirmationComponent } from '../approval-confirmation/approval
 export class ApprovalModalComponent implements OnInit {
 
   obj = {id:0,clientname:'',branch:'',clientaddress:'',category:'',service:'',media:'',reason:'',activationtarget:'',
-  quotation_date:'',custompricef:'',basicpricef:'',_img:'',unapprovalreason:'',approved:true}
+  quotation_date:'',custompricef:'',basicpricef:'',_img:'',unapprovalreason:'',approved:'0'}
   hideUnApprovalReason = true
   hideApprovedPrice = true
+  hideApproval
   constructor(
     private navParams: NavParams,
     private modalController: ModalController,
-    private router: ActivatedRoute,
     private customService: CustomsService
   ) {
     this.obj = this.navParams.get('obj')
+    console.log("OBJ",this.obj)
+    if(this.obj.approved === null){
+      this.hideApproval = false
+    }else{
+      this.hideApproval = true
+    }
     console.log("OBJ",this.obj)
   }
   displayReason(obj){
@@ -38,8 +43,6 @@ export class ApprovalModalComponent implements OnInit {
     this.unApproveColor = obj.unApproveColor
   }
   setApprove(obj){
-    //let _id = this.router.snapshot.paramMap.get("id")
-    //obj.id = _id
     this.customService.setApprove(obj, result => {
       console.log("setApprove",result)
       this.modalController.dismiss()
