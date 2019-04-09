@@ -7,6 +7,7 @@ import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ServiceService } from '../service.service';
 import { PricelistService } from '../pricelist.service';
+import { callbackify } from 'util';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -15,6 +16,7 @@ import { PricelistService } from '../pricelist.service';
 })
 export class PricelistNegoPage implements OnInit {
   obj = {
+    clientname:'',
     branch:'',
     category:'',
     service:'',
@@ -32,7 +34,7 @@ export class PricelistNegoPage implements OnInit {
     category_id:0,
     service_id:0,media_id:0,subservice_id:0,basicprice:0,normalprice:0,bottomprice:0,upperprice:0,
     basicpricef:0,normalpricef:0,bottompricef:0,upperpricef:0,
-    reason:'',otherreason:'',reasoning:''
+    reason:'',otherreason:'',reasoning:'',branch_id:'',quotation_date:''
   }
   medias = [{id:1,name:"Wireless"},{id:2,name:"FO"}]
   services
@@ -141,11 +143,77 @@ export class PricelistNegoPage implements OnInit {
       this.services = result
     })
   }
+  validateObj(obj,callback){
+    let isValid = true
+    console.log("Obj to save",obj)
+    
+    if(obj.clientname == ""){
+      alert("Nama Pelanggan tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.activationtarget == ""){
+      alert("Tanggal target Aktivasi tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.branch_id == ""){
+      alert("Cabang PadiNET tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.category_id == ""){
+      alert("Kategori tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.service_id == ""){
+      alert("Layanan tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.clientpic == ""){
+      alert("PIC tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.clienttlp == ""){
+      alert("Telp tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.clientpichp == ""){
+      alert("HP PIC tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.quotation_date == ""){
+      alert("Tanggal Penawaran tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.clientemail == ""){
+      alert("Tanggal Penawaran tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.clientaddress == ""){
+      alert("Tanggal Penawaran tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.reason == ""){
+      alert("Alasan tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.customprice == ""){
+      alert("Harga Custom tidak boleh kosong")
+      isValid = false
+    }
+    if(obj.normalprice == ""){
+      alert("Harga tidak boleh kosong, cek Media, Kapasitas")
+      isValid = false
+    }
+    if(isValid){
+      callback(obj)
+    }
+  }
   save(obj){
     console.log("OBJ to save",obj)
-    this.custom.save(obj,result => {
-      console.log("Result",result)
-      window.location.href = '/quotation-lists'
+    this.validateObj(obj,validatedObj => {
+      this.custom.save(validatedObj,result => {
+        console.log("Result",result)
+        window.location.href = '/quotation-lists'
+      })
     })
   }
   openFile(event,obj){

@@ -1,6 +1,5 @@
 <ion-header>
   <ion-toolbar>
-      <button ion-button menuToggle="right"><ion-icon name="menu"></ion-icon></button>
       <ion-title slot="secondary">Histori Pengajuan Harga</ion-title>
       <ion-datetime 
       display-format="MM YYYY" 
@@ -11,7 +10,12 @@
 
       </ion-datetime>
       <ion-label slot="secondary">{{userMail}}</ion-label>
+      <ion-select interface="popover">
+        <ion-select-option>test 1</ion-select-option>
+        <ion-select-option>test 2</ion-select-option>
+      </ion-select>
       <ion-buttons slot="secondary">
+        <ion-button (click)="showProfile()"><ion-icon name="more"></ion-icon></ion-button>
         <ion-button (click)="showLogin()" [hidden]="isNotLogin">Login</ion-button>
         <ion-button (click)="doLogout()" [hidden]="isLogin">Logout</ion-button>
       </ion-buttons>

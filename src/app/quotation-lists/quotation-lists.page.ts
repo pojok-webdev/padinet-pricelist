@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomsService } from '../customs.service';
 import { LoginComponent } from '../login/login.component';
-import { ModalController } from '@ionic/angular';
+import { ModalController, MenuController, PopoverController } from '@ionic/angular';
 import { QuotDetailComponent } from '../quot-detail/quot-detail.component';
 import { UserService } from '../user.service'
 import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ApprovalModalComponent } from '../approval-modal/approval-modal.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 @Component({
   selector: 'app-quotation-lists',
   templateUrl: './quotation-lists.page.html',
@@ -25,7 +27,9 @@ export class QuotationListsPage implements OnInit {
     private modalController: ModalController,
     private userService: UserService,
     private loginService: LoginService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private menuController: MenuController,
+    private popoverController: PopoverController
   ) {
     let email = localStorage.getItem("email")
     console.log("Email",email)
@@ -190,5 +194,22 @@ export class QuotationListsPage implements OnInit {
         }
       })
     })
+  }
+  toggleMenu(){
+    console.log("toggle menu invoked")
+    this.menuController.toggle("left")
+  }
+  doUserTask(obj){
+    console.log("OBJ doUserTask",obj)
+  }
+  async showProfile(){
+    const modal = await this.popoverController.create({
+      component: ChangePasswordComponent,
+      componentProps:{
+        obj:this.obj
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
+    return await modal.present()
   }
 }

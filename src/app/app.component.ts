@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UserService } from './user.service';
@@ -8,7 +8,7 @@ import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
 })
 export class AppComponent {
   public appPages = [
@@ -40,7 +40,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private userService: UserService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private menuController: MenuController
   ) {
     this.initializeApp();
     this.userService.isLogin(    
@@ -140,5 +141,10 @@ export class AppComponent {
         icon: promoIcon
       }
     ];
+  }
+  toggleMenu(){
+    console.log("toggle menu invoked")
+    this.menuController.toggle("left")
+    this.menuController.close("menuId")
   }
 }

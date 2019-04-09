@@ -19,6 +19,8 @@ import { PromoDetailComponent } from './promo-detail/promo-detail.component';
 import { ApprovalPipe } from './approval.pipe';
 import { ApprovalConfirmationComponent } from './approval-confirmation/approval-confirmation.component';
 import { ApprovalModalComponent } from './approval-modal/approval-modal.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   declarations: [
     ConfirmationComponent,
@@ -30,6 +32,8 @@ import { ApprovalModalComponent } from './approval-modal/approval-modal.componen
     QuotDetailComponent,
     ApprovalConfirmationComponent,
     ApprovalModalComponent,
+    UserProfileComponent,
+    ChangePasswordComponent,
     ApprovalPipe
   ],
   entryComponents: [
@@ -40,6 +44,8 @@ import { ApprovalModalComponent } from './approval-modal/approval-modal.componen
     LoginComponent,
     QuotDetailComponent,
     ApprovalConfirmationComponent,
+    UserProfileComponent,
+    ChangePasswordComponent,
     ApprovalModalComponent
   ],
   imports: [
