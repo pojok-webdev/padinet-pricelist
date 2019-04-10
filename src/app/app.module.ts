@@ -21,6 +21,7 @@ import { ApprovalConfirmationComponent } from './approval-confirmation/approval-
 import { ApprovalModalComponent } from './approval-modal/approval-modal.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RoleChooserComponent } from './role-chooser/role-chooser.component';
 @NgModule({
   declarations: [
     ConfirmationComponent,
@@ -34,6 +35,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ApprovalModalComponent,
     UserProfileComponent,
     ChangePasswordComponent,
+    RoleChooserComponent,
     ApprovalPipe
   ],
   entryComponents: [
@@ -46,7 +48,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ApprovalConfirmationComponent,
     UserProfileComponent,
     ChangePasswordComponent,
-    ApprovalModalComponent
+    ApprovalModalComponent,
+    RoleChooserComponent
   ],
   imports: [
     BrowserModule,

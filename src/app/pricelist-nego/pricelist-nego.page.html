@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Pengajuan Harga {{obj.normalprice}}</ion-title>
-    <ion-label slot="secondary">{{userMail}}</ion-label>
     <ion-buttons slot="secondary">
-      <ion-button (click)="showModal()" [hidden]="isNotLogin">Login</ion-button>
-      <ion-button (click)="doLogout()" [hidden]="isLogin">Logout</ion-button>
+      <ion-button (click)="showChooseRoleModal(actor)"><ion-icon name="more"></ion-icon></ion-button>
+      <ion-button (click)="showProfile()"><ion-icon name="lock"></ion-icon></ion-button>
+      <ion-button (click)="showLogin()" [hidden]="isNotLogin"><ion-icon name="log-in"></ion-icon></ion-button>
+      <ion-button (click)="doLogout()" [hidden]="isLogin"><ion-icon name="log-out"></ion-icon></ion-button>
     </ion-buttons>
-  </ion-toolbar>
+</ion-toolbar>
 </ion-header>
 
 <ion-content padding>

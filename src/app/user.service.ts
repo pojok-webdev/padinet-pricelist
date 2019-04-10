@@ -22,7 +22,24 @@ export class UserService {
         localStorage.setItem("role",data.obj.role)
         localStorage.setItem("roleabbr",data.obj.roleabbr)
         localStorage.setItem("id",data.obj.id)
-        callback(data)
+        localStorage.setItem("obj",data.obj)
+        if(data.result){
+          console.log("OKEEEEEEEEEEEEEE")
+          callback(data)
+        }else{
+          console.log("GAAAAAAAAAAAAAAAAAAAAK")
+          callback({
+            result:false,
+            obj:[{
+            email:"",
+            hash:"",
+            id:0,
+            password:null,
+            role:"",
+            roleabbr:"",
+            username:""}]
+          })
+        }
       },
       err => {
         callback(err)
@@ -44,6 +61,7 @@ export class UserService {
     )*/
   }
   changePassword(obj,callback){
+    console.log("Obj change password",obj)
     this.obj = this.http.post(this.appvar.serverport+'userchangepassword',obj)
     this.obj.subscribe(
       data => {

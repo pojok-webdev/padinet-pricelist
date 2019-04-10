@@ -19,12 +19,16 @@ obj = {
   ngOnInit() {}
 
   doLogin(obj){
+    if(obj.email!==""){
     this.user.doLogin(obj,result=>{
       console.log("Result",result)
+      if(result.result){
       this.modalController.dismiss({
         result:result
-      })
-    })
+      })}
+    })}else{
+      alert("Email tidak boleh kosong")
+    }
   }
 
 }

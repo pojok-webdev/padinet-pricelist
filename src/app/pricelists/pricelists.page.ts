@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PricelistService } from '../pricelist.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { PricelistUpdateComponent } from '../pricelist-update/pricelist-update.component';
 import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-pricelists',
@@ -12,17 +13,19 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./pricelists.page.scss'],
 })
 export class PricelistsPage implements OnInit {
-objs
-isLogin
-isNotLogin
-userMail
-roleabbr
+  obj
+  objs
+  isLogin
+  isNotLogin
+  userMail
+  roleabbr
   constructor(
     private priceList:PricelistService,
     private modalcontroller: ModalController,
     private userService: UserService,
     private loginService: LoginService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private popoverController: PopoverController
   ) {
     this.priceList.gets(result=>{
       console.log("Result",result)
@@ -37,7 +40,7 @@ roleabbr
         console.log("roleabbr",this.roleabbr)
         this.appComponent.setMenuByRole(this.roleabbr)
         console.log("Ros",res)
-        if(this.roleabbr === "AM"){
+        if((this.roleabbr === "AM")||(this.roleabbr === "DM")){
           window.location.href = "/sales-pricelists"
         }
       }else{
@@ -50,7 +53,7 @@ roleabbr
           this.isLogin = false
           this.isNotLogin = true
           this.roleabbr = localStorage.getItem("roleabbr")
-          if(this.roleabbr === "AM"){
+          if((this.roleabbr === "AM")||(this.roleabbr === "DM")){
             window.location.href = "/sales-pricelists"
           }
           })
@@ -136,4 +139,18 @@ roleabbr
       })
     })
   }
+  doUserTask(obj){
+    console.log("OBJ doUserTask",obj)
+  }
+  async showProfile(){
+    const modal = await this.popoverController.create({
+      component: ChangePasswordComponent,
+      componentProps:{
+        obj:this.obj
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
+    return await modal.present()
+  }
+
 }

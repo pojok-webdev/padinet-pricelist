@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pilih Role</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-list>
+  <ion-item *ngFor="let obj of objs">
+    <ion-button (click)="applyRole(obj.roleabbr)">{{obj.role}}</ion-button>
+  </ion-item>
+</ion-list>

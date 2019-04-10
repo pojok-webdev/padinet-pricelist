@@ -8,8 +8,8 @@ export class AppvarService {
   port
   serverport
   constructor() {
-    this.server = '192.168.0.117'
-    //this.server = 'localhost'
+    //this.server = '192.168.0.117'
+    this.server = 'localhost'
     this.port = '2219'
     this.serverport = 'http://'+this.server+':'+this.port+'/'
   }

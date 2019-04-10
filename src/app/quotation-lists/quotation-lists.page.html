@@ -7,17 +7,11 @@
       value="2019-3-1" 
       placeholder="Filter Bulan" 
       (ionChange)="monthChange($event)">
-
       </ion-datetime>
-      <ion-label slot="secondary">{{userMail}}</ion-label>
-      <ion-select interface="popover">
-        <ion-select-option>test 1</ion-select-option>
-        <ion-select-option>test 2</ion-select-option>
-      </ion-select>
       <ion-buttons slot="secondary">
-        <ion-button (click)="showProfile()"><ion-icon name="more"></ion-icon></ion-button>
-        <ion-button (click)="showLogin()" [hidden]="isNotLogin">Login</ion-button>
-        <ion-button (click)="doLogout()" [hidden]="isLogin">Logout</ion-button>
+        <ion-button (click)="showProfile()"><ion-icon name="lock"></ion-icon></ion-button>
+        <ion-button (click)="showLogin()" [hidden]="isNotLogin"><ion-icon name="log-in"></ion-icon></ion-button>
+        <ion-button (click)="doLogout()" [hidden]="isLogin"><ion-icon name="log-out"></ion-icon></ion-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>

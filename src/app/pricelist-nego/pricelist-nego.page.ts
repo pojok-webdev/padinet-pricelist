@@ -7,7 +7,9 @@ import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ServiceService } from '../service.service';
 import { PricelistService } from '../pricelist.service';
-import { callbackify } from 'util';
+import { PopoverController, ModalController } from '@ionic/angular';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { RoleChooserComponent } from '../role-chooser/role-chooser.component';
 
 @Component({
   selector: 'app-pricelist-nego',
@@ -15,6 +17,7 @@ import { callbackify } from 'util';
   styleUrls: ['./pricelist-nego.page.scss'],
 })
 export class PricelistNegoPage implements OnInit {
+  actor
   obj = {
     clientname:'',
     branch:'',
@@ -66,12 +69,15 @@ export class PricelistNegoPage implements OnInit {
     private loginService: LoginService,
     private appComponent: AppComponent,
     private serviceService: ServiceService,
-    private priceList: PricelistService
+    private priceList: PricelistService,
+    private popoverController: PopoverController
   ) {
     this.hideOtherReason = true
     this.userService.isLogin(
       res=>{
       if(res!==false){
+        this.actor = localStorage.getItem("obj")
+        console.log("Actor",this.actor)
         this.isNotLogin = true
         this.userMail = res.email
         this.obj.createuser = res.email
@@ -89,6 +95,7 @@ export class PricelistNegoPage implements OnInit {
         console.log("Res",res)
         this.loginService.showLoginModal(res => {
           console.log("Here the data",res)
+          this.actor = localStorage.getItem("obj")
           this.userMail = localStorage.getItem("email")
           this.isLogin = false
           this.isNotLogin = true
@@ -242,14 +249,33 @@ export class PricelistNegoPage implements OnInit {
       this.isNotLogin = false
       this.loginService.showLoginModal(res => {
         console.log("Here the logout data",res)
+        let obj = res.data.result.obj
+        if(obj.length>1){
+          this.actor = obj
+          this.showChooseRoleModal(obj)
+        }
         let roleAbbr = res.data.result.obj.roleabbr
-        console.log("RoleAbbr",res.data.result.obj.roleabbr)
+
+        console.log("RoleAbbr",res.data.result.obj[0].roleabbr)
         this.userMail = localStorage.getItem("email")
         this.isLogin = false
         this.isNotLogin = true
         this.appComponent.setMenuByRole(roleAbbr)
       })
     })
+  }
+  afterChooseRole(obj){
+    console.log("OBJ after choose Role",obj)
+  }
+  async showChooseRoleModal(obj){
+    let pop = await this.popoverController.create({
+      component:RoleChooserComponent,
+      componentProps:{
+        obj:obj
+      }
+    })
+    pop.onDidDismiss().then((d:any)=>this.afterChooseRole(d))
+    return await pop.present()
   }
   populateServices(){
     this.hideSubService = true
@@ -337,4 +363,18 @@ export class PricelistNegoPage implements OnInit {
       this.hideOtherReason = false
     }
   }
+  doUserTask(obj){
+    console.log("OBJ doUserTask",obj)
+  }
+  async showProfile(){
+    const modal = await this.popoverController.create({
+      component: ChangePasswordComponent,
+      componentProps:{
+        obj:this.obj
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
+    return await modal.present()
+  }
+
 }

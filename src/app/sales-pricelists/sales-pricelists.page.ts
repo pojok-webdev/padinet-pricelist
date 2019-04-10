@@ -4,6 +4,8 @@ import { PricelistService } from '../pricelist.service';
 import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sales-pricelists',
@@ -50,7 +52,8 @@ roleabbr
     private priceList: PricelistService,
     private userService: UserService,
     private loginService: LoginService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private popoverController: PopoverController
   ) {
     this.userService.isLogin(
       res=>{
@@ -200,4 +203,18 @@ roleabbr
       })
     })
   }
+  doUserTask(obj){
+    console.log("OBJ doUserTask",obj)
+  }
+  async showProfile(){
+    const modal = await this.popoverController.create({
+      component: ChangePasswordComponent,
+      componentProps:{
+        obj:this.obj
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
+    return await modal.present()
+  }
+
 }

@@ -114,7 +114,7 @@ export class AppComponent {
       case 'DM':
       priceInfoLabel = 'Informasi Harga (DM)'
       pricelisturl = '/sales-pricelists'
-      promo = '/'
+      promo = '/promos'
       promoIcon = 'list'
       promoTitle = 'Promo'
       break

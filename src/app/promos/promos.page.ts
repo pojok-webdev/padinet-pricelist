@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
 import { PromoService } from '../promo.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { PromoDetailComponent } from '../promo-detail/promo-detail.component';
 import { AppComponent } from '../app.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-promos',
@@ -17,12 +18,14 @@ export class PromosPage implements OnInit {
   userMail
   promos
   roleabbr
+  obj
   constructor(
     private userService: UserService,
     private loginService: LoginService,
     private promoService: PromoService,
     private modalController:ModalController,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private popoverController: PopoverController
   ) {
     
     this.userService.isLogin(    
@@ -91,4 +94,18 @@ export class PromosPage implements OnInit {
       })
     })
   }
+  doUserTask(obj){
+    console.log("OBJ doUserTask",obj)
+  }
+  async showProfile(){
+    const modal = await this.popoverController.create({
+      component: ChangePasswordComponent,
+      componentProps:{
+        obj:this.obj
+      }
+    })
+    modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
+    return await modal.present()
+  }
+
 }
