@@ -6,11 +6,24 @@ import { AppvarService } from './appvar.service';
   providedIn: 'root'
 })
 export class UserService {
+  roles = []
   obj: Observable<any>
   constructor(
     private http: HttpClient,
     private appvar: AppvarService,
   ) {}
+  getRoles(obj,callback){
+    this.obj = this.http.post(this.appvar.serverport+'getuserroles',obj)
+    this.obj.subscribe(
+      data => {
+        console.log("success getRoles",data)
+        callback(data)
+      },err=>{
+        console.log("failed getRoles",err)
+        callback(err)
+      }
+    )
+  }
   doLogin(obj,callback){
     this.obj = this.http.post(this.appvar.serverport+'usercheckpassword',obj)
     this.obj.subscribe(
@@ -22,7 +35,6 @@ export class UserService {
         localStorage.setItem("role",data.obj.role)
         localStorage.setItem("roleabbr",data.obj.roleabbr)
         localStorage.setItem("id",data.obj.id)
-        localStorage.setItem("obj",data.obj)
         if(data.result){
           console.log("OKEEEEEEEEEEEEEE")
           callback(data)
@@ -47,21 +59,10 @@ export class UserService {
     )
   }
   doLogout(obj,callback){
-  localStorage.clear()
-  callback({message:'You have logged out'})
-/*    this.obj = this.http.post(this.appvar.serverport+'logout',obj)
-    this.obj.subscribe(
-      data => {
-        localStorage.clear()
-        callback(data)
-      },
-      err => {
-        callback(err)
-      }
-    )*/
+    localStorage.clear()
+    callback({message:'You have logged out'})
   }
   changePassword(obj,callback){
-    console.log("Obj change password",obj)
     this.obj = this.http.post(this.appvar.serverport+'userchangepassword',obj)
     this.obj.subscribe(
       data => {

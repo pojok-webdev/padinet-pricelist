@@ -6,6 +6,7 @@ import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { PopoverController } from '@ionic/angular';
+import { RoleChooserComponent } from '../role-chooser/role-chooser.component';
 
 @Component({
   selector: 'app-sales-pricelists',
@@ -215,6 +216,26 @@ roleabbr
     })
     modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
     return await modal.present()
+  }
+  afterChooseRole(obj){
+    console.log("OBJ after choose Role",obj)
+    location.reload()
+  }
+  showChooseRole(){
+    this.userService.getRoles({email:localStorage.getItem("email")},result => {
+      this.showChooseRoleModal(result)      
+    });
+
+  }
+  async showChooseRoleModal(obj){
+    let pop = await this.popoverController.create({
+      component:RoleChooserComponent,
+      componentProps:{
+        obj:obj
+      }
+    })
+    pop.onDidDismiss().then((d:any)=>this.afterChooseRole(d))
+    return await pop.present()
   }
 
 }

@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { RoleChooserComponent } from '../role-chooser/role-chooser.component';
 
 @Component({
   selector: 'app-pricelists',
@@ -28,7 +29,6 @@ export class PricelistsPage implements OnInit {
     private popoverController: PopoverController
   ) {
     this.priceList.gets(result=>{
-      console.log("Result",result)
       this.objs = result
     })
     this.userService.isLogin(    
@@ -37,18 +37,14 @@ export class PricelistsPage implements OnInit {
         this.isNotLogin = true
         this.userMail = res.email
         this.roleabbr = localStorage.getItem("roleabbr")
-        console.log("roleabbr",this.roleabbr)
         this.appComponent.setMenuByRole(this.roleabbr)
-        console.log("Ros",res)
         if((this.roleabbr === "AM")||(this.roleabbr === "DM")){
           window.location.href = "/sales-pricelists"
         }
       }else{
         this.isNotLogin = false
         this.userMail = ''
-        console.log("Res",res)
         this.loginService.showLoginModal(res => {
-          console.log("Here the data",res)
           this.userMail = localStorage.getItem("email")
           this.isLogin = false
           this.isNotLogin = true
@@ -99,8 +95,6 @@ export class PricelistsPage implements OnInit {
       }
     })
     modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
-    //const {data} = await modal.onDidDismiss()
-    //console.log("Data",data)
     return await modal.present()
   }
   doEdit(obj){
@@ -115,17 +109,14 @@ export class PricelistsPage implements OnInit {
   }
   doLogout(){
     this.userService.doLogout({},res=>{
-      console.log("Res",res)
       this.userMail = ""
       this.isLogin = true
       this.isNotLogin = false
       this.loginService.showLoginModal(res => {
-        console.log("Here the data",res)
         this.userMail = localStorage.getItem("email")
         this.isLogin = false
         this.isNotLogin = true
         this.appComponent.setMenuByRole(this.roleabbr)
-        console.log("Ros",res)
         this.roleabbr = localStorage.getItem("roleabbr")
         if(this.roleabbr === "AM"){
           window.location.href = "/sales-pricelists"
@@ -135,7 +126,6 @@ export class PricelistsPage implements OnInit {
         }else{
           window.location.href = '/pricelists'
         }
-
       })
     })
   }
@@ -152,5 +142,23 @@ export class PricelistsPage implements OnInit {
     modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
     return await modal.present()
   }
-
+  afterChooseRole(obj){
+    console.log("OBJ after choose Role",obj)
+    location.reload()
+  }
+  showChooseRole(){
+    this.userService.getRoles({email:localStorage.getItem("email")},result => {
+      this.showChooseRoleModal(result)      
+    });
+  }
+  async showChooseRoleModal(obj){
+    let pop = await this.popoverController.create({
+      component:RoleChooserComponent,
+      componentProps:{
+        obj:obj
+      }
+    })
+    pop.onDidDismiss().then((d:any)=>this.afterChooseRole(d))
+    return await pop.present()
+  }
 }

@@ -77,6 +77,7 @@ export class AppComponent {
     });
   }
   setMenuByRole(roleAbbr){
+    console.log("setMenuByRole invoked",roleAbbr)
     let priceInfoLabel = 'Informasi Harga'
     let pricelisturl = ''
     let promo = ''

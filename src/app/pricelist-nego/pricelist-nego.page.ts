@@ -7,7 +7,7 @@ import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ServiceService } from '../service.service';
 import { PricelistService } from '../pricelist.service';
-import { PopoverController, ModalController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { RoleChooserComponent } from '../role-chooser/role-chooser.component';
 
@@ -76,7 +76,7 @@ export class PricelistNegoPage implements OnInit {
     this.userService.isLogin(
       res=>{
       if(res!==false){
-        this.actor = localStorage.getItem("obj")
+        this.actor = this.userService.roles
         console.log("Actor",this.actor)
         this.isNotLogin = true
         this.userMail = res.email
@@ -95,7 +95,7 @@ export class PricelistNegoPage implements OnInit {
         console.log("Res",res)
         this.loginService.showLoginModal(res => {
           console.log("Here the data",res)
-          this.actor = localStorage.getItem("obj")
+          this.actor = this.userService.roles
           this.userMail = localStorage.getItem("email")
           this.isLogin = false
           this.isNotLogin = true
@@ -256,7 +256,7 @@ export class PricelistNegoPage implements OnInit {
         }
         let roleAbbr = res.data.result.obj.roleabbr
 
-        console.log("RoleAbbr",res.data.result.obj[0].roleabbr)
+        console.log("RoleAbbr",res.data.result.obj.roleabbr)
         this.userMail = localStorage.getItem("email")
         this.isLogin = false
         this.isNotLogin = true
@@ -266,6 +266,14 @@ export class PricelistNegoPage implements OnInit {
   }
   afterChooseRole(obj){
     console.log("OBJ after choose Role",obj)
+    console.log("Actor",this.actor)
+    location.reload()
+  }
+  showChooseRole(){
+    this.userService.getRoles({email:localStorage.getItem("email")},result => {
+      this.showChooseRoleModal(result)      
+    });
+
   }
   async showChooseRoleModal(obj){
     let pop = await this.popoverController.create({

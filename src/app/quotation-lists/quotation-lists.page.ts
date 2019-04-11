@@ -7,8 +7,8 @@ import { UserService } from '../user.service'
 import { LoginService } from '../login.service';
 import { AppComponent } from '../app.component';
 import { ApprovalModalComponent } from '../approval-modal/approval-modal.component';
-import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { RoleChooserComponent } from '../role-chooser/role-chooser.component';
 @Component({
   selector: 'app-quotation-lists',
   templateUrl: './quotation-lists.page.html',
@@ -211,5 +211,25 @@ export class QuotationListsPage implements OnInit {
     })
     modal.onDidDismiss().then((d:any)=>this.doUserTask(d))
     return await modal.present()
+  }
+  afterChooseRole(obj){
+    console.log("OBJ after choose Role",obj)
+    location.reload()
+  }
+  showChooseRole(){
+    this.userService.getRoles({email:localStorage.getItem("email")},result => {
+      this.showChooseRoleModal(result)      
+    });
+
+  }
+  async showChooseRoleModal(obj){
+    let pop = await this.popoverController.create({
+      component:RoleChooserComponent,
+      componentProps:{
+        obj:obj
+      }
+    })
+    pop.onDidDismiss().then((d:any)=>this.afterChooseRole(d))
+    return await pop.present()
   }
 }
