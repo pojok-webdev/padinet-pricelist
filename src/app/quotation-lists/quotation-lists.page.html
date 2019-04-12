@@ -66,6 +66,10 @@
         <ion-label>Alasan Tidak Approv</ion-label>
         <ion-label>{{quotation.unapprovalreason}}</ion-label>
       </ion-item>
-  </ion-item-group>
+      <ion-item [hidden]="quotation.hideApprovedPrice">
+        <ion-label>Harga yang diapprov</ion-label>
+        <ion-label>{{quotation.approvedprice}}</ion-label>
+      </ion-item>
+    </ion-item-group>
 </ion-list>
 </ion-content>

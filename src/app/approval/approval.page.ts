@@ -16,6 +16,7 @@ export class ApprovalPage implements OnInit {
   }
   hideUnApprovalReason = true
   hideApprovalReason = false
+  hideApprovalPrice = false
   constructor(
     private customService: CustomsService,
     private router: ActivatedRoute,
@@ -39,26 +40,20 @@ export class ApprovalPage implements OnInit {
   setApprove(obj){
     let _id = this.router.snapshot.paramMap.get("id")
     obj.id = _id
+    obj.approved = this.obj.approved
+    if(obj.approved === '0'){
+      obj.note = obj.unapprovalreason
+    }else{
+      obj.note = obj.approvedprice
+    }
     this.customService.setApprove(obj, result => {
       console.log("setApprove",result)
       this.showModal(obj)
     })
   }
-  toggleUnApprovalReason(){
-    if(this.obj.approved==='1'){
-      this.hideApprovalReason = false
-      this.hideUnApprovalReason = true
-    }else if(this.obj.approved==='0'){
-      this.hideApprovalReason = true
-      this.hideUnApprovalReason = false  
-    }else{
-      this.hideApprovalReason = false
-      this.hideUnApprovalReason = true
-    }
-    console.log("Approval invoked",this.hideUnApprovalReason)
-  }
   displayReason(obj){
     this.hideUnApprovalReason = obj.displayStatus
+    this.hideApprovalPrice = !this.hideUnApprovalReason
     this.obj.approved = obj.approved
   }
   unApproveColor = 'light'
@@ -78,8 +73,6 @@ export class ApprovalPage implements OnInit {
     modal.onDidDismiss().then((d:any)=>{
       console.log("D",d)
     })
-    //const {data} = await modal.onDidDismiss()
-    //console.log("Data",data)
     return await modal.present()
   }
 

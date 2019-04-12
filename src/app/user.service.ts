@@ -36,10 +36,10 @@ export class UserService {
         localStorage.setItem("roleabbr",data.obj.roleabbr)
         localStorage.setItem("id",data.obj.id)
         if(data.result){
-          console.log("OKEEEEEEEEEEEEEE")
+          console.log("Success Login")
           callback(data)
         }else{
-          console.log("GAAAAAAAAAAAAAAAAAAAAK")
+          console.log("Failed Login")
           callback({
             result:false,
             obj:[{

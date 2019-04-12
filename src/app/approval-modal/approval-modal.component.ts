@@ -43,10 +43,14 @@ export class ApprovalModalComponent implements OnInit {
     this.unApproveColor = obj.unApproveColor
   }
   setApprove(obj){
+    console.log("obj to approve",obj)
+    if(obj.approvedprice === null){
+      obj.approvedprice = 0
+    }
     this.customService.setApprove(obj, result => {
       console.log("setApprove",result)
-      this.modalController.dismiss()
-      this.showModal(obj)
+      this.modalController.dismiss(obj)
+      //this.showModal(obj)
     })
   }
   async showModal(obj){

@@ -40,14 +40,17 @@ export class QuotationListsPage implements OnInit {
           case '0':
           quotation.statuscolor = "danger"
           quotation.hideUnapprovalReason = false
+          quotation.hideApprovedPrice = true
           break
           case '1':
           quotation.statuscolor = "success"
           quotation.hideUnapprovalReason = true
+          quotation.hideApprovedPrice = false
           break
           default:
           quotation.statuscolor = "warning"
           quotation.hideUnapprovalReason = true
+          quotation.hideApprovedPrice = true
           break
         }
       });
@@ -161,6 +164,31 @@ export class QuotationListsPage implements OnInit {
     modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
     return await modal.present()
   }
+  reloadApproval(approvalStatus){
+    console.log("ApprovalStatus",approvalStatus)
+    let quotation = this.quotations.find(quot=>quot.id === approvalStatus.data.id)
+    console.log("Quotation found",quotation)
+    switch(quotation.approved){
+      case   "0":
+      quotation.approvalstring = "Tidak Disetujui"
+      quotation.hideUnapprovalReason = false
+      quotation.statuscolor = "danger"
+      quotation.hideApprovedPrice = true
+      break
+      case   "1":
+      quotation.approvalstring = "Disetujui"
+      quotation.hideUnapprovalReason = true
+      quotation.statuscolor = "success"
+      quotation.hideApprovedPrice = false
+      break
+      default:
+      quotation.approvalstring = "Belum Disetujui"
+      quotation.hideUnapprovalReason = true
+      quotation.statuscolor = "warning"
+      quotation.hideApprovedPrice = true
+      break
+    }
+  }
   async showApprovalPage(quotation){
     const modal = await this.modalController.create({
       component:ApprovalModalComponent,
@@ -168,7 +196,7 @@ export class QuotationListsPage implements OnInit {
         obj:quotation
       }
     })
-    modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
+    modal.onDidDismiss().then((approvalStatus:any)=>this.reloadApproval(approvalStatus))
     return await modal.present()
   }
   doLogout(){
