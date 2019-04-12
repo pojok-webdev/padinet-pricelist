@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { CustomsService } from '../customs.service';
-import { ApprovalConfirmationComponent } from '../approval-confirmation/approval-confirmation.component';
 
 @Component({
   selector: 'app-approval-modal',
@@ -9,12 +8,13 @@ import { ApprovalConfirmationComponent } from '../approval-confirmation/approval
   styleUrls: ['./approval-modal.component.scss'],
 })
 export class ApprovalModalComponent implements OnInit {
-
   obj = {id:0,clientname:'',branch:'',clientaddress:'',category:'',service:'',media:'',reason:'',activationtarget:'',
   quotation_date:'',custompricef:'',basicpricef:'',_img:'',unapprovalreason:'',approved:'0'}
   hideUnApprovalReason = true
   hideApprovedPrice = true
   hideApproval
+  unApproveColor = 'light'
+  approveColor = 'light'
   constructor(
     private navParams: NavParams,
     private modalController: ModalController,
@@ -34,9 +34,6 @@ export class ApprovalModalComponent implements OnInit {
     this.obj.approved = obj.approved
     this.hideApprovedPrice = !obj.displayStatus
   }
-
-  unApproveColor = 'light'
-  approveColor = 'light'
   changeColor(obj){
     console.log("color",obj)
     this.approveColor = obj.approveColor
@@ -50,24 +47,7 @@ export class ApprovalModalComponent implements OnInit {
     this.customService.setApprove(obj, result => {
       console.log("setApprove",result)
       this.modalController.dismiss(obj)
-      //this.showModal(obj)
     })
   }
-  async showModal(obj){
-    const modal = await this.modalController.create({
-      component:ApprovalConfirmationComponent,
-      componentProps:{
-        obj:this.obj
-      }
-    })
-    modal.onDidDismiss().then((d:any)=>{
-      console.log("D",d)
-    })
-    //const {data} = await modal.onDidDismiss()
-    //console.log("Data",data)
-    return await modal.present()
-  }
-
   ngOnInit() {}
-
 }

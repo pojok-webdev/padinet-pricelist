@@ -22,6 +22,7 @@ export class QuotationListsPage implements OnInit {
   userMail
   roleabbr
   hidecantApprove
+  hideQuoteEdit
   constructor(
     private custom: CustomsService,
     private modalController: ModalController,
@@ -32,30 +33,13 @@ export class QuotationListsPage implements OnInit {
     private popoverController: PopoverController
   ) {
     let email = localStorage.getItem("email")
+    let roleabbr = localStorage.getItem("roleabbr")
     console.log("Email",email)
-    this.custom.gets(result => {
-      this.quotations = result
-      this.quotations.forEach(quotation => {
-        switch(quotation.approved){
-          case '0':
-          quotation.statuscolor = "danger"
-          quotation.hideUnapprovalReason = false
-          quotation.hideApprovedPrice = true
-          break
-          case '1':
-          quotation.statuscolor = "success"
-          quotation.hideUnapprovalReason = true
-          quotation.hideApprovedPrice = false
-          break
-          default:
-          quotation.statuscolor = "warning"
-          quotation.hideUnapprovalReason = true
-          quotation.hideApprovedPrice = true
-          break
-        }
-      });
-      console.log('quotation',this.quotations)
-})
+    if((roleabbr==="AM")||(roleabbr==="DM")){
+      this.custom.getsbyemail({email:email},result => this.populateQuotes(result,false))
+    }else{
+      this.custom.gets(result => this.populateQuotes(result,true))
+    }
     this.userService.isLogin(
       res=>{
         if(res!==false){
@@ -77,25 +61,11 @@ export class QuotationListsPage implements OnInit {
           console.log("Res",res)
           this.loginService.showLoginModal(res => {
             console.log("Here your data",res)
-            this.custom.gets(result => {
-              this.quotations = result
-              this.quotations.forEach(quotation => {
-                switch(quotation.approved){
-                  case '0':
-                  quotation.statuscolor = "danger"
-                  quotation.hideUnapprovalReason = false
-                  break
-                  case '1':
-                  quotation.statuscolor = "success"
-                  quotation.hideUnapprovalReason = true
-                  break
-                  default:
-                  quotation.statuscolor = "warning"
-                  quotation.hideUnapprovalReason = true
-                  break
-                }
-              });
-            })
+            if((roleabbr==="AM")||(roleabbr==="DM")){
+              this.custom.getsbyemail({email:email},result => this.populateQuotes(result,false))
+            }else{
+              this.custom.gets(result => this.populateQuotes(result,true))
+            }
             this.userMail = localStorage.getItem("email")
             this.isLogin = false
             this.isNotLogin = true
@@ -103,6 +73,36 @@ export class QuotationListsPage implements OnInit {
         }
     });
     this.isLogin = !this.isNotLogin
+  }
+  populateQuotes(objs,ableToEdit){
+    this.hideQuoteEdit = ableToEdit
+    objs.forEach(obj => {
+      if(obj.approved!==null){
+        obj.hideQuoteEdit = true
+      }
+    })
+    this.quotations = objs
+    this.quotations.forEach(quotation => {
+      switch(quotation.approved){
+        case '0':
+        quotation.statuscolor = "danger"
+        quotation.hideUnapprovalReason = false
+        quotation.hideApprovedPrice = true
+        break
+        case '1':
+        quotation.statuscolor = "success"
+        quotation.hideUnapprovalReason = true
+        quotation.hideApprovedPrice = false
+        break
+        default:
+        quotation.statuscolor = "warning"
+        quotation.hideUnapprovalReason = true
+        quotation.hideApprovedPrice = true
+        break
+      }
+    });
+    console.log('quotation',this.quotations)
+
   }
   getStatusColor(status){
     console.log("Status",status)

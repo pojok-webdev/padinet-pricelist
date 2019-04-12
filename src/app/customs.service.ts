@@ -31,6 +31,17 @@ private obj:Observable<any>
       }
     )
   }
+  getsbyemail(obj,callback){
+    this.obj = this.http.get<any>(this.appvar.serverport+'customgetsbyemail/'+obj.email)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
   getById(obj,callback){
     this.obj = this.http.get<any>(this.appvar.serverport+'customgetbyid/'+obj.id)
     this.obj.subscribe(
