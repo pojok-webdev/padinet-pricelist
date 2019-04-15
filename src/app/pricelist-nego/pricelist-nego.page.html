@@ -134,7 +134,7 @@
 </ion-item>
 <ion-item>
     <ion-label>Harga Pengajuan Custom</ion-label>
-    <ion-input [(ngModel)]="obj.customprice" placeholder="Harga Yang diajukan"></ion-input>
+    <ion-input [(ngModel)]="obj.customprice" type="number" required placeholder="Harga Yang diajukan"></ion-input>
   </ion-item>
   <ion-button (click)="save(obj)">Simpan</ion-button>
 </ion-content>

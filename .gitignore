@@ -34,3 +34,5 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 resources/
+src/app/appvar.service.ts
+
