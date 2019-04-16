@@ -10,7 +10,7 @@ export class AppvarService {
   constructor() {
     let productionServer = '192.168.0.117'
     let devServer = 'localhost'
-    this.server = devServer
+    this.server = productionServer
     this.port = '2219'
     this.serverport = 'http://'+this.server+':'+this.port+'/'
   }

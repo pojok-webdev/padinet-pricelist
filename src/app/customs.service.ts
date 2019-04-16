@@ -7,9 +7,12 @@ import { AppvarService } from './appvar.service';
   providedIn: 'root'
 })
 export class CustomsService {
-private obj:Observable<any>
+  private obj:Observable<any>
+  sm = 'ketut@padi.net.id'
   constructor(private http: HttpClient,private appvar: AppvarService) { }
   save(obj,callback){
+    obj.to = this.sm
+    obj.cc = obj.createuser
     this.obj = this.http.post<any>(this.appvar.serverport+'customsave',obj)
     this.obj.subscribe(
       data => {
@@ -65,6 +68,8 @@ private obj:Observable<any>
     )
   }
   setApprove(obj,callback){
+    obj.to = obj.createuser
+    obj.cc = this.sm
     this.obj = this.http.post<any>(this.appvar.serverport+'setapprove',obj)
     this.obj.subscribe(
       data => {
