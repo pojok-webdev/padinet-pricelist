@@ -8,7 +8,7 @@ import { AppvarService } from './appvar.service';
 })
 export class CustomsService {
   private obj:Observable<any>
-  sm = 'ketut@padi.net.id'
+  sm = 'puji@padi.net.id'
   constructor(private http: HttpClient,private appvar: AppvarService) { }
   save(obj,callback){
     obj.to = this.sm

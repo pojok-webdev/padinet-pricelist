@@ -202,7 +202,7 @@ export class PricelistNegoPage implements OnInit {
       alert("Alasan tidak boleh kosong")
       isValid = false
     }
-    if(obj.customprice == ""){
+    if((obj.customprice == "")||(obj.customprice == null)){
       alert("Harga Custom tidak boleh kosong")
       isValid = false
     }

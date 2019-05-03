@@ -159,7 +159,7 @@ export class QuotationListsPage implements OnInit {
       component:QuotDetailComponent,
       componentProps:{
         obj:obj
-      }
+      },cssClass:"quoteDetail"
     })
     modal.onDidDismiss().then((d:any)=>this.handleModalDismiss(d))
     return await modal.present()
