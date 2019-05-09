@@ -8,11 +8,11 @@ import { AppvarService } from './appvar.service';
 })
 export class CustomsService {
   private obj:Observable<any>
-  sm = 'puji@padi.net.id'
   constructor(private http: HttpClient,private appvar: AppvarService) { }
   save(obj,callback){
-    obj.to = this.sm
+    obj.to = this.appvar.sm
     obj.cc = obj.createuser
+    console.log("SAVE : TO",obj.to,"CC",obj.cc)
     this.obj = this.http.post<any>(this.appvar.serverport+'customsave',obj)
     this.obj.subscribe(
       data => {
@@ -27,6 +27,7 @@ export class CustomsService {
     this.obj = this.http.get<any>(this.appvar.serverport+'customgets')
     this.obj.subscribe(
       data => {
+        console.log("__DATA(gets)",data)
         callback(data)
       },
       err => {
@@ -38,6 +39,7 @@ export class CustomsService {
     this.obj = this.http.get<any>(this.appvar.serverport+'customgetsbyemail/'+obj.email)
     this.obj.subscribe(
       data => {
+        console.log("__DATA(getsbyemail)",data)
         callback(data)
       },
       err => {
@@ -60,6 +62,7 @@ export class CustomsService {
     this.obj = this.http.get<any>(this.appvar.serverport+'getbymonth/'+obj.monthyear)
     this.obj.subscribe(
       data => {
+        console.log("__DATA(getsbyMonth)",data)
         callback(data)
       },
       err => {
@@ -69,7 +72,8 @@ export class CustomsService {
   }
   setApprove(obj,callback){
     obj.to = obj.createuser
-    obj.cc = this.sm
+    obj.cc = this.appvar.sm
+    console.log("SET APPROVE : TO",obj.to,"CC",obj.cc)
     this.obj = this.http.post<any>(this.appvar.serverport+'setapprove',obj)
     this.obj.subscribe(
       data => {

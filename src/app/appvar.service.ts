@@ -7,6 +7,7 @@ export class AppvarService {
   server
   port
   serverport
+  sm = "pw.prayitno@gmail.com"
   constructor() {
     let productionServer = '192.168.0.117'
     let devServer = 'localhost'
