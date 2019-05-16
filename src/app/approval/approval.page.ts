@@ -34,6 +34,15 @@ export class ApprovalPage implements OnInit {
           this.obj._img = result
         })
       })
+      let email = localStorage.getItem("email")
+      let roleabbr = localStorage.getItem("roleabbr")
+      console.log("Email",email)
+      if((roleabbr==="AM")||(roleabbr==="DM")){
+        window.location.href = '/quotation-lists'
+      }else{
+
+      }
+  
     }
   ngOnInit() {
   }
